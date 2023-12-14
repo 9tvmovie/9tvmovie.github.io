@@ -157,7 +157,11 @@ h1 {
 
   .emox {
     margin-bottom: 1.5rem!important;
-  }
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
   .btn{
     --bs-btn-color: #46739f !important;
