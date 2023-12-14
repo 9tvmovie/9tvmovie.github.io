@@ -1,0 +1,170 @@
+/* Stylesheet sesuai kebutuhan Anda */
+@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Ubuntu:wght@500&display=swap");
+
+@font-face {
+  font-display: fallback;
+  font-family: FS_Numbers;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://cintakuaja68.github.io/assets/font/FS_Numbers.woff2)
+    format("woff2");
+}
+
+body {
+  background-color: #091018;color: #bdb7b7;
+  font-family: 'Righteous';
+}
+main {
+  min-height: 71vh;
+}
+h1 {
+  font-size: 2rem;
+}
+
+ @media (min-width: 1200px){
+  .padd {
+    padding-left: 105px;
+    padding-right: 8%;
+}
+  }
+  @media (min-width: 768px) {
+    header {
+      display: none;
+    }
+  }
+  @media (max-width: 576px) {
+    .row>* {
+      width: 50%;
+    }
+  }
+  .py-5-custom {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .image-item {
+    margin: 10px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .card-img-top {
+    border-radius: 5px;
+  }
+    .cardx {
+    border:none !important;
+    --bs-card-bg: #fff0;
+  }
+  
+
+  .card-body {
+    flex: 1 1 auto;
+    padding: 6px;
+    color: var(--bs-card-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    background-image: linear-gradient( to top, #000000e3, #000000d6, #000000d6, #000000cf, #000000c7, #000000b8, #000000ab, #000000ad, #00000091, #00000078, #00000047, #00000000 )
+  }
+  .card-text {
+    font-size: 11px;
+    font-family:'FS_Numbers';
+  }
+  .card-title {
+    font-size: 15px;
+  }
+
+  .lead {
+    font-size: 14px;
+  }
+  .rang {
+    font-size: 13px;
+    font-family: 'FS_Numbers';
+    color: #e1ff00;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-shadow: 0 0 3px #000000;
+    /* border: 2px solid yellow; */
+    margin: 4px;
+    padding: 0px 4px;
+    border-radius: 5px;
+  }
+  .rang-right {
+    font-size: 13px;
+    font-family: 'FS_Numbers';
+    color: #e1ff00;
+    position: absolute;
+    top: 0;
+    text-shadow: 0 0 3px #000000;
+    /* border: 2px solid yellow; */
+    margin: 4px;
+    padding: 0px 4px;
+    border-radius: 5px;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+  }
+  .card:hover .overlay {
+    opacity: 1;
+  }
+  .play-icon {
+    color: #009fff;
+    font-size: 45px;
+  }
+  .yearS {
+    color: yellowgreen;
+  }
+
+  .posterPath {
+    height: 246px !important;
+  }
+
+  .navbar {
+    --bs-navbar-color: white;
+    --bs-navbar-hover-color: #fb00ed;
+    --bs-navbar-disabled-color: grey;
+    --bs-navbar-active-color: #00b2ff;
+    --bs-navbar-brand-color: #fb00ed;
+    --bs-navbar-brand-hover-color: #008aff;
+  }
+
+  .navbar-toggler {
+    padding: 0px 5px;
+    color: var(--bs-navbar-color);
+    background-color: #cbd3db;
+    border: 2px solid;
+  }
+
+  .emox {
+    margin-bottom: 1.5rem!important;
+  }
+
+  .btn{
+    --bs-btn-color: #46739f !important;
+  }
+
+  .pege {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Deskripsi singkat tentang halaman Anda">
+    <meta name="keywords" content="kata kunci, untuk, halaman, Anda">
+    <meta name="author" content="Nama Anda">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="/assets/style.css">
+
+    <!-- JavaScript untuk memuat header.html -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'header.html', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var headerContent = xhr.responseText;
+                    document.head.insertAdjacentHTML('beforeend', headerContent);
+                }
+            };
+            xhr.send();
+        });
+    </script>
+
+    <title>Halaman Landing</title>
+</head>
+<body>
+
+    <header>
+        <h1>Selamat Datang di Halaman Landing!</h1>
+        <p>Deskripsi singkat tentang apa yang ditawarkan oleh halaman Anda.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#tentang-kami">Tentang Kami</a></li>
+            <li><a href="#mengapa-memilih-kami">Mengapa Memilih Kami</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="tentang-kami">
+            <h2>Tentang Kami</h2>
+            <p>Isi dengan informasi tentang perusahaan atau layanan Anda.</p>
+        </section>
+
+        <section id="mengapa-memilih-kami">
+            <h2>Mengapa Memilih Kami</h2>
+            <ul>
+                <li>Keunggulan 1</li>
+                <li>Keunggulan 2</li>
+                <li>Keunggulan 3</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Hak Cipta &copy; 2023 Nama Perusahaan. Semua Hak Dilindungi.</p>
+    </footer>
+
+</body>
+</html>

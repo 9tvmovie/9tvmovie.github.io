@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Deskripsi singkat tentang halaman Anda">
+    <meta name="keywords" content="kata kunci, untuk, halaman, Anda">
+    <meta name="author" content="Nama Anda">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        /* Menambahkan jarak antara baris 1 dan 2 */
+        .py-5-custom {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        .antarBaris {
+            padding-top:20px
+        }
+
+        @media (max-width: 576px) {
+            /* Menjadikan 2 kolom di mode mobile */
+            .row-cols-lg-6 > * {
+                flex: 0 0 100%;
+                max-width: 50%;
+            }
+            .row>* {
+              padding-right: 0;
+            }
+        }
+    </style>
+    <title>Halaman Landing</title>
+</head>
+<body>
+
+    <header class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1>Selamat Datang di Halaman Landing!</h1>
+            <p class="lead">Deskripsi singkat tentang apa yang ditawarkan oleh halaman Anda.</p>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#tentang-kami">Tentang Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="#mengapa-memilih-kami">Mengapa Memilih Kami</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <section id="tentang-kami" class="container my-5">
+            <h2 class="text-center">Tentang Kami</h2>
+            <p class="text-center">Isi dengan informasi tentang perusahaan atau layanan Anda.</p>
+        </section>
+
+        <section id="mengapa-memilih-kami" class="container-fluid bg-light py-5 py-5-custom">
+            <div class="container">
+                <h2 class="text-center">Mengapa Memilih Kami</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-4 antarBaris">
+                    <!-- Baris 1 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg" class="card-img-top" alt="Poster 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 1</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 1.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/pD6sL4vntUOXHmuvJPPZAgvyfd9.jpg" class="card-img-top" alt="Poster 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 2</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 2.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg" class="card-img-top" alt="Poster 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 3</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 3.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/gPbM0MK8CP8A174rmUwGsADNYKD.jpg" class="card-img-top" alt="Poster 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 4</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 4.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/diXBeMzvfJb2iJg3G0kCUaMCzEc.jpg" class="card-img-top" alt="Poster 5">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 5</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 5.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/eyTu5c8LniVciRZIOSHTvvkkgJa.jpg" class="card-img-top" alt="Poster 6">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 6</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 6.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Baris 2 -->
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-4 antarBaris">
+                    <!-- Card 7, Card 8, ..., Card 12 -->
+                    <!-- Card 7 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg" class="card-img-top" alt="Poster 7">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 7</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 7.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 8 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/pD6sL4vntUOXHmuvJPPZAgvyfd9.jpg" class="card-img-top" alt="Poster 8">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 8</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 8.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 9 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/29rhl1xopxA7JlGVVsf1UHfYPvN.jpg" class="card-img-top" alt="Poster 9">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 9</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 9.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 10 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/gPbM0MK8CP8A174rmUwGsADNYKD.jpg" class="card-img-top" alt="Poster 10">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 10</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 10.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 11 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/diXBeMzvfJb2iJg3G0kCUaMCzEc.jpg" class="card-img-top" alt="Poster 11">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 11</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 11.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 12 -->
+                    <div class="col">
+                        <div class="card">
+                            <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/eyTu5c8LniVciRZIOSHTvvkkgJa.jpg" class="card-img-top" alt="Poster 12">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Poster 12</h5>
+                                <p class="card-text">Deskripsi singkat tentang poster 12.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>Hak Cipta &copy; 2023 Nama Perusahaan. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
