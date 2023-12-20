@@ -3,16 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover the latest and most popular films at 9TVMovie. Gain exclusive access to our constantly updated collection, enjoy regular releases, and immerse yourself in quality entertainment. Explore the world of movies at your fingertips!">
-  <meta name="keywords" content="9tvmovie, 9TVMovie Online, watch Movie & TVShow for Free, Popular Movie">
+  <meta name="description" content="Discover the latest and most popular films at 9TVMovie.!">
+  <meta name="keywords" content="9tvmovie, 9TVMovie Online, nonton Film & TVShow gratis, Film Populer">
   <meta name="author" content="9TVMovie">
-  <title>9TVMovie :: Watch Movie & TVShow for Free</title>
+  <title>9TVMovie :: Nonton Film & TVShow Gratis</title>
+  <link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <!-- Tambahkan FontAwesome jika belum ada -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
+  <link rel='stylesheet' href='/assets/style.css'>
+  <style>
+    /* CAROOUSLE */
+
+  .owl-nav button {
+    position: absolute;
+    top: 50%;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    transition: all 0.3s ease-in-out;
+  }
+  .owl-nav button.owl-prev {
+    right: 40px;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(167, 130, 233, 0.03) !important;
+    border: 1px solid rgba(167, 130, 233, 0.06) !important;
+    border-radius: 6px;
+  }
+  .owl-nav button.owl-next {
+    right: 0;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(167, 130, 233, 0.03) !important;
+    border: 1px solid rgba(167, 130, 233, 0.06) !important;
+    border-radius: 6px;
+  }
+  
+  .owl-nav button.owl-prev:hover, button.owl-next:hover {
+    color: #0093ff !important;
+  }
+  .owl-dots {
+    position: relative;
+    text-align: center;
+    bottom: 33px;
+  }
+  .owl-dots button.owl-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #0087ff;
+    margin: 0 3px;
+  }
+  .owl-dots button.owl-dot.active {
+    background-color: #ff00b3;
+  }
+  .owl-dots button.owl-dot:focus {
+    outline: none;
+  }
+  .owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(255 0 222 / 38%) !important;
+  }
+
+  </style>
 </head>
 <body>
+
+  <!---------------------------------
+     Preloader 
+    ----------------------------------->
+    <div class="page-loader text-info" role="status">
+      <div class="loader">Load</div>
+    </div>
+    <!---------------------------------
+     Preloader 
+    ----------------------------------->
 <!---------------------------------
      Preloader 
     ----------------------------------->
@@ -22,260 +94,892 @@
       <!---------------------------------
        Preloader 
       ----------------------------------->
+
     <header class="bg-primary text-white text-center py-1">
         <div class="container">
             <h1>Welcome to 9TVMovie!</h1>
             <p class="lead">Discover the latest and most popular films at 9TVMovie. Gain exclusive access to our constantly updated collection, enjoy regular releases, and immerse yourself in quality entertainment. Explore the world of movies at your fingertips!</p>
         </div>
     </header>
-
-    <nav class="navbar navbar-expand-lg bg-dark text-white padd">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">9TVMovie</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <!-- Movie -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Movie
-              </a>
-              <ul class="dropdown-menu" id="movieGenres">
-                <li><a class="dropdown-item" href="#">Loading...</a></li>
-              </ul>
-            </li>
-            <!-- TVShow -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  TVShow
-                </a>
-                <ul class="dropdown-menu" id="tvGenres">
-                    <li><a class="dropdown-item" href="#">Loading...</a></li>
-                  </ul>
+         
+      <nav class="navbar navbar-expand-lg bg-dark text-white padd">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">9TVMovie</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-            <!-- Menudrop submenu "Movie" dan "TV" -->
+<!-- Movie -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Movie
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/movie/lists/trending.html">Trending Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/nowplay.html">Now Play Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/popular.html">Popular Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/upcoming.html">Upcoming Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/top-rated.html">Top Rated Movie</a></li>
+  </ul>
+</li>
+<!-- TVShow -->
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Genre
+      TVShow
     </a>
     <ul class="dropdown-menu">
-      <!-- Submenu "Movie" -->
-      <li>
-        <a class="dropdown-item" href="#">Movie</a>
-        <ul class="submenu">
-          <li><a class="dropdown-item" href="#">Category Movie List</a></li>
-          <!-- Tambahkan item submenu Movie lainnya jika diperlukan -->
-        </ul>
-      </li>
-      <!-- Submenu "TV" -->
-      <li>
-        <a class="dropdown-item" href="#">TV</a>
-        <ul class="submenu">
-          <li><a class="dropdown-item" href="#">Category TV List</a></li>
-          <!-- Tambahkan item submenu TV lainnya jika diperlukan -->
-        </ul>
-      </li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
+        <li><a class="dropdown-item" href="/tv/lists/trending.html">Trending TV Show</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/airing.html">Airing Today TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/onair.html">On The Air TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/popular.html">Popular TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/top-rated.html">Top Rated TV Shhow</a></li>
+      </ul>
   </li>
-  <!-- Menudrop submenu "Movie" dan "TV" END -->
-            <li class="nav-item">
-              <a href='/image.html' class="nav-link">Image</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="button" onclick="cariFilm()">Search</button>
-          </form>
+
+              
+    <!-- Menudrop submenu "Movie" dan "TV" END -->
+              <li class="nav-item">
+                <a href='/images/' class="nav-link">Images</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/actor/">Actor</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="button" onclick="cariFilm()">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+     <main>
+      <div class="container mt-5">
+    <div class="row" id="results"></div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination pege" id="pagination"></ul>
+    </nav>
+  </div>
+
+  <div class="container HdAfter">
+    <a class="moreList" href="/movie/lists/trending.html">
+    <h1 class="mb-2">Weekly Trend <span class="movieColor">Movie</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+    <div id="weekly-trend-movie-container" class="owl-carousel owl-theme">
+    </div>
+ </div>
+
+    <div class="container mt-5 HdAfter">
+      <a class="moreList" href="/movie/lists/nowplay.html">
+        <h1 class="mb-2">Now Play <span class="movieColor">Movie</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="now-playing-container" class="owl-carousel owl-theme">
+        </div>
+    </div>
+
+    <div class="container mt-5 HdAfter">
+      <a class="moreList" href="/movie/lists/popular.html">
+        <h1 class="mb-2">Popular <span class="movieColor">Movie</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="popular-movie-container" class="owl-carousel owl-theme">
         </div>
       </div>
-    </nav>
 
-<main>
+      
+    <div class="container mt-5 HdAfter">
+      <a class="moreList" href="/movie/lists/upcoming.html">
+        <h1 class="mb-2">Upcoming <span class="movieColor">Movie</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="upcoming-movie-container" class="owl-carousel owl-theme">
+        </div>
+    </div>
 
-  <div class="container mt-5">
-    <h1 class="mb-4">Weekly Trend movies</h1>
-    <div id="movie-list-trending" class="row"></div>
+    <div class="container mt-5 HdAfter">
+      <a class="moreList" href="/movie/lists/top-rated.html">
+        <h1 class="mb-2">Top Rated <span class="movieColor">Movie</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="top-rated-movie-container" class="owl-carousel owl-theme">
+        </div>
+    </div>
 
-    <h1 class="mb-4 mt-5">Now Playing Movies</h1>
-    <div id="movie-list-now-playing" class="row"></div>
+    <div class="container mt-5 HdAfter">
+      <a class="moreList" href="/tv/lists/trending.html">
+        <h1 class="mb-2">Weekly Trend <span class="tvColor">TV SHows</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+            <div id="weekly-trend-tv-show-container" class="owl-carousel owl-theme">
+      </div>
+    </div>
 
-    <h1 class="mb-4 mt-5">Upcoming Movies</h1>
-    <div id="movie-list-upcoming" class="row"></div>
-  </div>
+    <div class="container mt-5 HdAfter">
+      <a class="moreList" href="/tv/lists/airing.html">
+        <h1 class="mb-2">Airing To Day <span class="tvColor">TV SHows</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="airing-today-container" class="owl-carousel owl-theme">
+        </div>
+      </div>
+
+      <div class="container mt-5 HdAfter">
+        <a class="moreList" href="/tv/lists/onair.html">
+          <h1 class="mb-2">On The Air <span class="tvColor">TV SHows</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="on-the-air-container" class="owl-carousel owl-theme">
+        </div>
+      </div>
+
+      <div class="container mt-5 HdAfter">
+        <a class="moreList" href="/tv/lists/popular.html">
+          <h1 class="mb-2">Popular <span class="tvColor">TV SHows</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="popular-tv-container" class="owl-carousel owl-theme">
+        </div>
+      </div>
+
+      <div class="container mt-5 HdAfter">
+        <a class="moreList" href="/tv/lists/top-rated.html">
+          <h1 class="mb-2">Tp Rated <span class="tvColor">TV SHows</span> <i class='fas fa-chevron-right moreListArrow'></i></h1></a>
+        <div id="top-rated-tv-container" class="owl-carousel owl-theme">
+        </div>
+      </div>
+      
+      
+    </div>                    
 </main>
 <footer class="bg-dark text-white text-center py-3">
-    <div class="container">
-        <p>Copyright &copy; 2023 <a href="/">9TVMovie</a>. All Rights Reserved.</p>
-    </div>
+<div class="container">
+    <p>Copyright &copy; 2023 <a href="/">9TVMovie</a>. All Rights Reserved.</p>
+</div>
 </footer>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/9tvmovie.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+<script src="/assets/9tvmovie.js"></script>
   <script>
-    const nowPlayingUrl = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${apiKey}`;
-    const upcomingUrl = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=${apiKey}`;
-    const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?language=en-US&page=1&api_key=${apiKey}`;
-    const genreApiUrl = `https://api.themoviedb.org/3/genre/movie/list?language=en&api_key=${apiKey}`;
-    const tvGenreApiUrl = `https://api.themoviedb.org/3/genre/tv/list?language=en&api_key=${apiKey}`;
+    let currentPage = 1;
 
-    $(document).ready(function() {
-      // Fetch Now Playing Movies from TMDb API
+    function cariFilm() {
+    
+        hideWeeklyTrendContainers(); 
+      const keyword = $('#searchInput').val();
+      const apiUrl = `https://api.themoviedb.org/3/search/multi?include_adult=false&language=en-US&page=${currentPage}&api_key=${apiKey}&query=${keyword}`;
+
       $.ajax({
-        url: nowPlayingUrl,
+        url: apiUrl,
         method: 'GET',
-        dataType: 'json',
         success: function(data) {
-          displayMovies(data.results, 'movie-list-now-playing');
+          tampilkanHasilPencarian(data.results);
+          tampilkanPagination(data.total_pages);
         },
         error: function(error) {
-          console.error('Error fetching Now Playing data:', error);
+          console.error('Error:', error);
         }
       });
-
-      // Fetch Upcoming Movies from TMDb API
-      $.ajax({
-        url: upcomingUrl,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          displayMovies(data.results, 'movie-list-upcoming');
-        },
-        error: function(error) {
-          console.error('Error fetching Upcoming data:', error);
-        }
-      });
-
-      // Fetch Trending Movies from TMDb API
-      $.ajax({
-        url: trendingUrl,
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          displayMovies(data.results, 'movie-list-trending');
-        },
-        error: function(error) {
-          console.error('Error fetching Trending data:', error);
-        }
-      });
-    });
-
-    function fetchMovieGenres() {
-  $.ajax({
-    url: genreApiUrl,
-    method: 'GET',
-    success: function(data) {
-      // Panggil fungsi untuk menampilkan genre ke dalam dropdown
-      displayMovieGenres(data.genres);
-    },
-    error: function(error) {
-      console.error('Error:', error);
-      // Jika terjadi kesalahan, tampilkan pesan kesalahan pada dropdown
-      $('#movieGenres').html('<li><a class="dropdown-item" href="#">Error fetching genres</a></li>');
     }
-  });
-}
 
-// Fungsi untuk menampilkan genre ke dalam dropdown
-function displayMovieGenres(genres) {
-  const dropdownMenu = $('#movieGenres');
+    function tampilkanHasilPencarian(results) {
+      const resultsContainer = $('#results');
+      resultsContainer.empty();
 
-  // Kosongkan dropdown menu
-  dropdownMenu.empty();
+      if (results.length === 0) {
+        resultsContainer.append('<p>Tidak ada hasil ditemukan.</p>');
+        return;
+        showWeeklyTrendContainers();
+  }
 
-  // Tambahkan item untuk setiap genre
-  genres.forEach(genre => {
-    const genreItem = `<li><a class="dropdown-item" href="#">${genre.name}</a></li>`;
-    dropdownMenu.append(genreItem);
-  });
-}
+  results.forEach(item => {
+  const posterPath = item.poster_path ? `https://image.tmdb.org/t/p/w300${item.poster_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg';
+  const title = item.title || item.name;
+  const type = item.media_type === 'movie' ? 'movie' : 'tv';
+  const releaseDate = (type === 'movie' && item.release_date) ? new Date(item.release_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) :
+                     (type === 'tv' && item.first_air_date) ? new Date(item.first_air_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) :
+                     'n/a';
+  const mtYear = (type === 'movie' && item.release_date) ? '(' +  new Date(item.release_date).getFullYear() + ')': (type === 'tv' && item.first_air_date) ? '(' +  new Date(item.first_air_date).getFullYear() + ')' : '';
+  const roundedVoteAverage = item.vote_average ? item.vote_average.toFixed(1) : 'n/a';
+  const titleOri = item.original_title ? item.original_title : '';
+  const itemId = (type === 'movie') ? item.id : item.id;
 
-// Panggil fungsi untuk mengambil dan menampilkan genre saat halaman dimuat
-fetchMovieGenres();
+  const resultItem = `
+    <div class="col-md-2 mb-4 resPost">
+      <div class="card position-relative">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectKeHalaman('${type}', '${itemId}', '${title}')">
+         <i class="fas fa-play-circle play-icon"></i>
+        </div>
+        <div class="rang"><i class="fa-solid fa-star"></i>
+          ${roundedVoteAverage}
+        </div>
+        <div class="rang-right">${type}</div>
+        <img src="${posterPath}" class="card-img-top posterPath" alt="${title} ${titleOri}">
+        <div class="card-body">
+          <h5 class="card-title">${title} ${itemId}<span class='yearS'>${mtYear}</span></h5>
+          <p class="card-text">${releaseDate}</p>
+        </div>
+      </div>
+    </div>
+  `;
 
-// Fungsi untuk mengambil data genre TV dari API
-function fetchTvGenres() {
-  $.ajax({
-    url: tvGenreApiUrl,
-    method: 'GET',
-    success: function(data) {
-      // Panggil fungsi untuk menampilkan genre TV ke dalam dropdown
-      displayTvGenres(data.genres);
-    },
-    error: function(error) {
-      console.error('Error:', error);
-      // Jika terjadi kesalahan, tampilkan pesan kesalahan pada dropdown
-      $('#tvGenres').html('<li><a class="dropdown-item" href="#">Error fetching genres</a></li>');
+  resultsContainer.append(resultItem);
+});
+
     }
-  });
-}
 
-// Fungsi untuk menampilkan genre TV ke dalam dropdown
-function displayTvGenres(genres) {
-  const dropdownMenu = $('#tvGenres');
+    function tampilkanPagination(totalPages) {
+      const paginationContainer = $('#pagination');
+      paginationContainer.empty();
 
-  // Kosongkan dropdown menu
-  dropdownMenu.empty();
+      if (totalPages > 10) {
+        // Tampilkan tombol prev
+        const prevItem = `<li class="page-item"><a class="page-link" href="#" onclick="gantiHalaman(${currentPage - 1})">Previous</a></li>`;
+        paginationContainer.append(prevItem);
+      }
 
-  // Tambahkan item untuk setiap genre TV
-  genres.forEach(genre => {
-    const genreItem = `<li><a class="dropdown-item" href="#">${genre.name}</a></li>`;
-    dropdownMenu.append(genreItem);
-  });
-}
+      for (let i = 1; i <= totalPages; i++) {
+        // Tampilkan tombol hanya untuk 10 halaman pertama dan halaman aktif
+        if (i <= 10 || (i > 10 && i === totalPages) || (i > 10 && i === currentPage) || (i > 10 && i === currentPage - 1) || (i > 10 && i === currentPage + 1)) {
+          const pageItem = `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" onclick="gantiHalaman(${i})">${i}</a></li>`;
+          paginationContainer.append(pageItem);
+        }
+      }
 
-// Panggil fungsi untuk mengambil dan menampilkan genre TV saat halaman dimuat
-fetchTvGenres();
+      if (totalPages > 10) {
+        // Tampilkan tombol next
+        const nextItem = `<li class="page-item"><a class="page-link" href="#" onclick="gantiHalaman(${currentPage + 1})">Next</a></li>`;
+        paginationContainer.append(nextItem);
+      }
+    }
 
+    function gantiHalaman(page) {
+      currentPage = page;
+      cariFilm();
+    }
 
-    function displayMovies(movies, containerId) {
-      const movieListContainer = $(`#${containerId}`);
-
-      // Hanya ambil 12 film pertama
-      const limitedMovies = movies.slice(0, 12);
-
-      limitedMovies.forEach(movie => {
-        const posterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150';
-        const releaseDate = movie.release_date ? new Date(movie.release_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'n/a';
-        const yearMovie = movie.release_date ? new Date(movie.release_date).getFullYear() : 'n/a';
-        const movieType = 'Movie'; // Tambahkan tipe film di sebelah kanan vote_average
-        const roundedVoteAverage = movie.vote_average.toFixed(1);
-        
-        const movieCard = `
-          <div class="col-md-2 mb-4">
-            <div class="card position-relative">
-              <div class="overlay">
+// Trending Movie
+function displayWeeklyTrend(mediaType, movies) {
+      const container = $(`#weekly-trend-${mediaType.toLowerCase()}-container`);
+  
+      movies.forEach(function (movie) {
+        const mediaType = 'Movie';
+        const movieElement = `
+          <div class="now-playing-movie">
+            <div style="cursor:pointer;" class="overlay" onclick="redirectToMoviePage('${movie.id}', '${movie.title}')">
                 <i class="fas fa-play-circle play-icon"></i>
               </div>
-              <div class="rang"><i class="fa-solid fa-star"></i>
-                ${roundedVoteAverage}
-              </div>
-              <div class="rang-right">${movieType}
-              </div>
-              <img src="${posterPath}" class="card-img-top" alt="${movie.title}">
-              <div class="card-body">
-                <h5 class="card-title">${movie.title} <span class='yearS'>(${yearMovie})</span></h5>
-                <p class="card-text">${releaseDate}</p>
-              </div>
+            <div class="rang"><i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(1)}</div>
+            <div class="rang-right">${mediaType}</div>
+            <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+            <div class="card-body">
+              <h5 class="card-title">${movie.title}<span class='yearS'> (${movie.release_date.slice(0, 4)})</span></h5>
+              <p class="card-text">${movie.release_date}</p>
             </div>
           </div>
         `;
-
-        movieListContainer.append(movieCard);
+        container.append(movieElement);
       });
     }
-  </script>
 
+$(window).on('load', function () {
+    const weeklyTrendMoviesUrl = `https://api.themoviedb.org/3/trending/movie/week?language=en-US&page=1&api_key=${apiKey}`;
+   
+
+    // Ambil data film yang sedang tren minggu ini dari API TMDb
+    $.ajax({
+      url: weeklyTrendMoviesUrl,
+      method: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        displayWeeklyTrend('movie', data.results);
+        
+        // Inisialisasi Owl Carousel pada elemen dengan ID "weekly-trend-movie-container"
+        $("#weekly-trend-movie-container").owlCarousel({
+          items: 3,
+          loop: true,
+          margin: 10,
+          autoplay: true,
+          autoplayTimeout: 6000,
+          autoplayHoverPause: true,
+          responsive: {
+            0: { items: 2 },
+            600: { items: 3 },
+            1000: { items: 7 }
+          },
+          nav: true,
+          dots: false,
+          navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+        });
+      },
+      error: function (error) {
+        console.error('Error fetching Weekly Trend Movie data:', error);
+      }
+    });
+});
+
+// NOW PLAY MOVIE
+function displayWeeklyTrendMovies(movies) {
+    const container = $('#now-playing-container');
+  
+    movies.forEach(function (movie) {
+      const mediaType = 'Movie';
+      const movieElement = `
+        <div class="now-playing-movie">
+            <div style="cursor:pointer;" class="overlay" onclick="redirectToMoviePage('${movie.id}', '${movie.title}')">
+                <i class="fas fa-play-circle play-icon"></i>
+              </div>
+          <div class="rang"><i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(1)}</div>
+          <div class="rang-right">${mediaType}</div>
+          <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+          <div class="card-body">
+            <h5 class="card-title">${movie.title}<span class='yearS'> (${movie.release_date.slice(0, 4)})</span></h5>
+            <p class="card-text">${movie.release_date}</p>
+          </div>
+        </div>
+      `;
+      container.append(movieElement);
+    });
+  }
+  
+  $(window).on('load', function () {
+    const weeklyTrendMoviesUrl = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${apiKey}`;
+  
+    // Ambil data film yang sedang tren minggu ini dari API TMDb
+    $.ajax({
+      url: weeklyTrendMoviesUrl,
+      method: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        displayWeeklyTrendMovies(data.results);
+  
+        // Inisialisasi Owl Carousel pada elemen dengan ID "now-playing-container"
+        $("#now-playing-container").owlCarousel({
+          items: 3,
+          loop: true,
+          margin: 10,
+          autoplay: true,
+          autoplayTimeout: 6000,
+          autoplayHoverPause: true,
+          responsive: {
+            0: {
+              items: 2
+            },
+            600: {
+              items: 3
+            },
+            1000: {
+              items: 7
+            }
+          },
+          nav: true, // Enable navigation
+          dots: false, // Enable pagination dots
+          navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"], // Custom navigation icons
+        });
+      },
+      error: function (error) {
+        console.error('Error fetching Weekly Trend Movie data:', error);
+      }
+    });
+  });
+
+  // POPULAR MOVIE
+  function displayPopularMovies(movies) {
+  const container = $('#popular-movie-container');
+
+  movies.forEach(function (movie) {
+    const movieElement = `
+      <div class="now-playing-movie">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToMoviePage('${movie.id}', '${movie.title}')">
+                <i class="fas fa-play-circle play-icon"></i>
+              </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(1)}</div>
+        <div class="rang-right">Movie</div>
+        <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+        <div class="card-body">
+          <h5 class="card-title">${movie.title}<span class='yearS'> (${movie.release_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${movie.release_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(movieElement);
+  });
+}
+
+$(window).on('load', function () {
+  const popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch popular movies from the API
+  $.ajax({
+    url: popularMoviesUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayPopularMovies(data.results);
+
+      // Initialize Owl Carousel for popular movies
+      $("#popular-movie-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching popular movies data:', error);
+    }
+  });
+});
+
+  // UPCOMING MOVIE
+  function displayUpcomingMovies(movies) {
+  const container = $('#upcoming-movie-container');
+
+  movies.forEach(function (movie) {
+    const movieElement = `
+      <div class="now-playing-movie">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToMoviePage('${movie.id}', '${movie.title}')">
+                <i class="fas fa-play-circle play-icon"></i>
+              </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(1)}</div>
+        <div class="rang-right">Movie</div>
+        <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+        <div class="card-body">
+          <h5 class="card-title">${movie.title}<span class='yearS'> (${movie.release_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${movie.release_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(movieElement);
+  });
+}
+
+$(window).on('load', function () {
+  const upcomingMoviesUrl = `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch upcoming movies from the API
+  $.ajax({
+    url: upcomingMoviesUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayUpcomingMovies(data.results);
+
+      // Initialize Owl Carousel for upcoming movies
+      $("#upcoming-movie-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching upcoming movies data:', error);
+    }
+  });
+});
+
+// TOP RATED MOVIE
+function displayTopRatedMovies(movies) {
+  const container = $('#top-rated-movie-container');
+
+  movies.forEach(function (movie) {
+    const movieElement = `
+      <div class="now-playing-movie">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToMoviePage('${movie.id}', '${movie.title}')">
+                <i class="fas fa-play-circle play-icon"></i>
+              </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(1)}</div>
+        <div class="rang-right">Movie</div>
+        <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
+        <div class="card-body">
+          <h5 class="card-title">${movie.title}<span class='yearS'> (${movie.release_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${movie.release_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(movieElement);
+  });
+}
+
+$(window).on('load', function () {
+  const topRatedMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch top-rated movies from the API
+  $.ajax({
+    url: topRatedMoviesUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayTopRatedMovies(data.results);
+
+      // Initialize Owl Carousel for top-rated movies
+      $("#top-rated-movie-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching top-rated movies data:', error);
+    }
+  });
+});
+
+// Trending TVSHOW
+function displayWeeklyTrendTvShows(tvShows) {
+    const container = $(`#weekly-trend-tv-show-container`);
+    
+    tvShows.forEach(function (tvShow) {
+      const tvShowElement = `
+        <div class="now-playing-tv-show">
+            <div style="cursor:pointer;" class="overlay" onclick="redirectToTvShowPage('${tvShow.id}', '${tvShow.name}')">
+            <i class="fas fa-play-circle play-icon"></i>
+          </div>
+          <div class="rang"><i class="fa-solid fa-star"></i> ${tvShow.vote_average.toFixed(1)}</div>
+          <div class="rang-right">TV</div>
+          <img src="https://image.tmdb.org/t/p/w500/${tvShow.poster_path}" alt="${tvShow.name}">
+          <div class="card-body">
+            <h5 class="card-title">${tvShow.name}<span class='yearS'> (${tvShow.first_air_date.slice(0, 4)})</span></h5>
+            <p class="card-text">${tvShow.first_air_date}</p>
+          </div>
+        </div>
+      `;
+      container.append(tvShowElement);
+    });
+  }
+  
+  $(window).on('load', function () {
+      const weeklyTrendTVUrl = `https://api.themoviedb.org/3/trending/tv/week?language=en-US&page=1&api_key=${apiKey}`;
+  
+      // Ambil data acara TV yang sedang tren minggu ini dari API TMDb
+      $.ajax({
+        url: weeklyTrendTVUrl,
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            displayWeeklyTrendTvShows(data.results);
+          
+          // Inisialisasi Owl Carousel pada elemen dengan ID "weekly-trend-tv-container"
+          $("#weekly-trend-tv-show-container").owlCarousel({
+            items: 3,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 6000,
+            autoplayHoverPause: true,
+            responsive: {
+              0: { items: 2 },
+              600: { items: 3 },
+              1000: { items: 7 }
+            },
+            nav: true,
+            dots: false,
+            navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+          });
+        },
+        error: function (error) {
+          console.error('Error fetching Weekly Trend TV data:', error);
+        }
+      });
+  });
+
+  // AIRING TO DAY TV
+  function displayAiringTodayTvShows(tvShows) {
+  const container = $('#airing-today-container');
+
+  tvShows.forEach(function (tvShow) {
+    const tvShowElement = `
+      <div class="now-playing-tv-show">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToTvShowPage('${tvShow.id}', '${tvShow.name}')">
+            <i class="fas fa-play-circle play-icon"></i>
+          </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${tvShow.vote_average.toFixed(1)}</div>
+        <div class="rang-right">TV</div>
+        <img src="https://image.tmdb.org/t/p/w500/${tvShow.poster_path}" alt="${tvShow.name}">
+        <div class="card-body">
+          <h5 class="card-title">${tvShow.name}<span class='yearS'> (${tvShow.first_air_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${tvShow.first_air_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(tvShowElement);
+  });
+}
+
+$(window).on('load', function () {
+  const airingTodayTvUrl = `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch airing today TV shows from the API
+  $.ajax({
+    url: airingTodayTvUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayAiringTodayTvShows(data.results);
+
+      // Initialize Owl Carousel for airing today TV shows
+      $("#airing-today-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching airing today TV shows data:', error);
+    }
+  });
+});
+
+// ON THE AIR TV
+function displayOnTheAirTvShows(tvShows) {
+  const container = $('#on-the-air-container');
+
+  tvShows.forEach(function (tvShow) {
+    const tvShowElement = `
+      <div class="now-playing-tv-show">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToTvShowPage('${tvShow.id}', '${tvShow.name}')">
+            <i class="fas fa-play-circle play-icon"></i>
+          </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${tvShow.vote_average.toFixed(1)}</div>
+        <div class="rang-right">TV</div>
+        <img src="https://image.tmdb.org/t/p/w500/${tvShow.poster_path}" alt="${tvShow.name}">
+        <div class="card-body">
+          <h5 class="card-title">${tvShow.name}<span class='yearS'> (${tvShow.first_air_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${tvShow.first_air_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(tvShowElement);
+  });
+}
+
+$(window).on('load', function () {
+  const onTheAirTvUrl = `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch on the air TV shows from the API
+  $.ajax({
+    url: onTheAirTvUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayOnTheAirTvShows(data.results);
+
+      // Initialize Owl Carousel for on the air TV shows
+      $("#on-the-air-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching on the air TV shows data:', error);
+    }
+  });
+});
+
+// POPULAR TV
+function displayPopularTvShows(tvShows) {
+  const container = $('#popular-tv-container');
+
+  tvShows.forEach(function (tvShow) {
+    const tvShowElement = `
+      <div class="now-playing-tv-show">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToTvShowPage('${tvShow.id}', '${tvShow.name}')">
+            <i class="fas fa-play-circle play-icon"></i>
+          </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${tvShow.vote_average.toFixed(1)}</div>
+        <div class="rang-right">TV</div>
+        <img src="https://image.tmdb.org/t/p/w500/${tvShow.poster_path}" alt="${tvShow.name}">
+        <div class="card-body">
+          <h5 class="card-title">${tvShow.name}<span class='yearS'> (${tvShow.first_air_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${tvShow.first_air_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(tvShowElement);
+  });
+}
+
+$(window).on('load', function () {
+  const popularTvUrl = `https://api.themoviedb.org/3/tv/popular?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch popular TV shows from the API
+  $.ajax({
+    url: popularTvUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayPopularTvShows(data.results);
+
+      // Initialize Owl Carousel for popular TV shows
+      $("#popular-tv-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching popular TV shows data:', error);
+    }
+  });
+});
+
+// TOP RATED TV
+function displayTopRatedTvShows(tvShows) {
+  const container = $('#top-rated-tv-container');
+
+  tvShows.forEach(function (tvShow) {
+    const tvShowElement = `
+      <div class="now-playing-tv-show">
+        <div style="cursor:pointer;" class="overlay" onclick="redirectToTvShowPage('${tvShow.id}', '${tvShow.name}')">
+            <i class="fas fa-play-circle play-icon"></i>
+          </div>
+        <div class="rang"><i class="fa-solid fa-star"></i> ${tvShow.vote_average.toFixed(1)}</div>
+        <div class="rang-right">TV</div>
+        <img src="https://image.tmdb.org/t/p/w500/${tvShow.poster_path}" alt="${tvShow.name}">
+        <div class="card-body">
+          <h5 class="card-title">${tvShow.name}<span class='yearS'> (${tvShow.first_air_date.slice(0, 4)})</span></h5>
+          <p class="card-text">${tvShow.first_air_date}</p>
+        </div>
+      </div>
+    `;
+    container.append(tvShowElement);
+  });
+}
+
+$(window).on('load', function () {
+  const topRatedTvUrl = `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1&api_key=${apiKey}`;
+
+  // Fetch top-rated TV shows from the API
+  $.ajax({
+    url: topRatedTvUrl,
+    method: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      displayTopRatedTvShows(data.results);
+
+      // Initialize Owl Carousel for top-rated TV shows
+      $("#top-rated-tv-container").owlCarousel({
+        items: 3,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 6000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 2 },
+          600: { items: 3 },
+          1000: { items: 7 }
+        },
+        nav: true,
+        dots: false,
+        navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      });
+    },
+    error: function (error) {
+      console.error('Error fetching top-rated TV shows data:', error);
+    }
+  });
+});
+
+// Redirect MOVIE ELEMENT
+fetchTvGenres();
+
+function redirectToMoviePage(movieId, title) {
+  const formattedTitle = title.replace(/\s+/g, '-').replace(/:/g, '').toLowerCase();
+const moviePageUrl = `https://www.ninetvmovie.online/p/movie.html?id=${movieId}/${formattedTitle}`;
+
+      window.open(moviePageUrl, '_blank');
+    }
+
+// Redirect TV ELEMENT
+function redirectToTvShowPage(tvShowId, name) {
+  const formattedTitle = name.replace(/\s+/g, '-').replace(/:/g, '').toLowerCase();
+  const tvShowPageUrl = `https://www.ninetvmovie.online/p/tv.html?id=${tvShowId}`;
+
+  window.open(tvShowPageUrl, '_blank');
+}
+
+// Redirect Search ELEMENT
+function redirectKeHalaman(type, itemId, title) {
+  const formattedTitle = title.replace(/\s+/g, '-').replace(/:/g, '').toLowerCase();
+  
+  if (type === 'movie') {
+    const moviePageUrl = `https://www.ninetvmovie.online/p/movie.html?id=${itemId}/${formattedTitle}`;
+    window.open(moviePageUrl, '_blank');
+  } else if (type === 'tv') {
+    const tvShowPageUrl = `https://www.ninetvmovie.online/p/tv.html?id=${itemId}`;
+    window.open(tvShowPageUrl, '_blank');
+  }
+}
+
+
+
+  // Fungsi untuk menyembunyikan elemen weekly-trend-container
+function hideWeeklyTrendContainers() {
+  $('.HdAfter').hide();
+ 
+}
+// Fungsi untuk menampilkan elemen weekly-trend-container
+function showWeeklyTrendContainers() {
+  $('.HdAfter').show();
+ 
+}
+  </script>
 </body>
 </html>
