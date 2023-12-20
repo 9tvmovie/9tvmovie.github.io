@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Temukan film terbaru dan paling populer di 9TVMovie. Dapatkan akses eksklusif ke koleksi kami yang terus diperbarui, nikmati rilis reguler, dan tenggelam dalam hiburan berkualitas. Jelajahi dunia film di ujung jari Anda!">
+    <meta name="keywords" content="9tvmovie, 9TVMovie Online, nonton Film & TVShow secara Gratis, Film Populer">
+    <meta name="author" content="9TVMovie">
+    <title>9TVMovie :: Nonton Film & TVShow Gratis</title>
+    <link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700'>
+  <link rel='stylesheet' href='/assets/style.css'>
+    
+    <style>
+@media (max-width: 768px) {
+.cardCreditsMobile {
+     width: 120px;
+}
+.spaceMobile {
+    padding: 0 3px;
+}
+}
+.spaceMobile {
+    padding: 0 5px;
+}
+    </style>
+    <style>
+        /* CAROOUSLE */
+    
+      .owl-nav button {
+        position: absolute;
+        top: 50%;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        transition: all 0.3s ease-in-out;
+      }
+      .owl-nav button.owl-prev {
+        right: 40px;
+        top: -30px;
+        width: 30px;
+        height: 30px;
+        background-color: rgba(167, 130, 233, 0.03) !important;
+        border: 1px solid rgba(167, 130, 233, 0.06) !important;
+        border-radius: 6px;
+      }
+      .owl-nav button.owl-next {
+        right: 0;
+        top: -30px;
+        width: 30px;
+        height: 30px;
+        background-color: rgba(167, 130, 233, 0.03) !important;
+        border: 1px solid rgba(167, 130, 233, 0.06) !important;
+        border-radius: 6px;
+      }
+      
+      .owl-nav button.owl-prev:hover, button.owl-next:hover {
+        color: #0093ff !important;
+      }
+      .owl-dots {
+        position: relative;
+        text-align: center;
+        bottom: 33px;
+      }
+      .owl-dots button.owl-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #0087ff;
+        margin: 0 3px;
+      }
+      .owl-dots button.owl-dot.active {
+        background-color: #ff00b3;
+      }
+      .owl-dots button.owl-dot:focus {
+        outline: none;
+      }
+      .owl-nav button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgb(255 0 222 / 38%) !important;
+      }
+    
+      </style>
+</head>
+
+<body>
+    <!---------------------------------
+     Preloader 
+    ----------------------------------->
+    <div class="page-loader text-info" role="status">
+        <div class="loader">Load</div>
+    </div>
+    <!---------------------------------
+     Preloader 
+    ----------------------------------->
+
+    <header class="bg-primary text-white text-center py-1">
+        <div class="container">
+            <h1>Selamat datang di 9TVMovie!</h1>
+            <p class="lead">Temukan film terbaru dan paling populer di 9TVMovie. Dapatkan akses eksklusif ke koleksi kami yang terus diperbarui, nikmati rilis reguler, dan tenggelam dalam hiburan berkualitas. Jelajahi dunia film di ujung jari Anda!</p>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-dark text-white padd">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">9TVMovie</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+ <!-- Movie -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Movie
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/movie/lists/trending.html">Trending Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/nowplay.html">Now Play Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/popular.html">Popular Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/upcoming.html">Upcoming Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/top-rated.html">Top Rated Movie</a></li>
+  </ul>
+</li>
+<!-- TVShow -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      TVShow
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/tv/lists/trending.html">Trending TV Show</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/airing.html">Airing Today TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/onair.html">On The Air TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/popular.html">Popular TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/top-rated.html">Top Rated TV Shhow</a></li>
+      </ul>
+  </li>
+ 
+    <!-- Menudrop submenu "Movie" dan "TV" END -->
+              <li class="nav-item">
+                <a href='/images/' class="nav-link">Images</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/actor/">Actor</a>
+              </li>
+            </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="button" onclick="cariPerson()">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+      <div id="trend-people" class="container mt-5">
+        <div id="trending-All-people" class="row"></div>
+      </div>
+        <div class="container mt-5">
+            <div class="row" id="detailPersonContainer"></div>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination pege" id="pagination"></ul>
+            </nav>
+        </div>
+        <div class="container mt-5" id="detailActorContainer"></div>
+        <div class="container mt-5" id="KnownForCredits"></div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>Copyright &copy; 2023 <a href="/">9TVMovie</a>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+<script src="/assets/9tvmovie.js"></script>
+
+    <script>
+        let currentPage = 1;
+
+        function cariPerson() {
+            const query = $("#searchInput").val(); // Ambil nilai dari input pencarian
+            const settings = {
+                async: true,
+                crossDomain: true,
+                url: `https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=${currentPage}`,
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: `${authorization}`
+                }
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                tampilkanDetailPerson(response.results);
+                tampilkanPagination(response.total_pages);
+            });
+        }
+
+        function tampilkanDetailPerson(results) {
+    const detailPersonContainer = $("#detailPersonContainer");
+    const trendPeopleContainer = $("#trend-people");  // Add this line
+
+    trendPeopleContainer.hide();  // Add this line
+
+    detailPersonContainer.empty();
+
+        if (results && results.length > 0) {
+          const slicedResults = results.slice(0, 6);
+            results.forEach(person => {
+                // Modifikasi nama aktor: ganti spasi dengan "-", hilangkan tanda ":"
+                const modifiedName = person.original_name.replace(/ /g, '-').replace(/:/g, '');
+                const profilePath = person.profile_path ? `https://image.tmdb.org/t/p/w300/${person.profile_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg';
+                const personDetail = `
+                    <div class="col-md-2 mb-4 resPost">
+                        <a href="#${person.id}/${person.original_name.replace(/\s+/g, '-').toLowerCase()}" onclick="tampilkanDetailActor(${person.id})">
+                            <div class="card position-relative">
+              <div class="overlay overlayPerson">
+                <i class="fas fa-play-circle play-icon"></i>
+              </div>
+              <div class="rang"><i class="fa-solid fa-star"></i>
+                ${person.popularity}
+              </div>
+              <div class="rang-right">#
+              </div>
+              <a href="${profilePath}">
+                <img src="${profilePath}" class="card-img-top profilePath" style="height:100% !important" alt="${person.original_name}">
+            </a>
+              <div class="card-body" style="background-image:none">
+                <h5 class="card-title">${person.original_name}<span class='yearS'></span></h5>
+                <p class="card-text">${person.known_for_department}</p>
+              </div>
+            </div>
+            </a>
+          </div>
+                    `;
+                    detailPersonContainer.append(personDetail);
+                });
+            } else {
+                detailPersonContainer.append("<p>Tidak ada hasil person ditemukan.</p>");
+            }
+        }
+
+        function tampilkanPagination(totalPages) {
+            const paginationContainer = $('.pege'); // Change this line
+paginationContainer.empty();
+
+            if (totalPages > 1) {
+                let startPage = Math.max(1, currentPage - 4);
+                let endPage = Math.min(totalPages, startPage + 9);
+
+                if (endPage - startPage < 9) {
+                    startPage = Math.max(1, endPage - 9);
+                }
+
+                if (startPage > 1) {
+                    const prevItem = `<li class="page-item"><a class="page-link" href="#" onclick="gantiHalaman(${startPage - 1})">Previous</a></li>`;
+                    paginationContainer.append(prevItem);
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageItem = `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" onclick="gantiHalaman(${i})">${i}</a></li>`;
+                    paginationContainer.append(pageItem);
+                }
+
+                if (endPage < totalPages) {
+                    const nextItem = `<li class="page-item"><a class="page-link" href="#" onclick="gantiHalaman(${endPage + 1})">Next</a></li>`;
+                    paginationContainer.append(nextItem);
+                }
+            }
+        }
+
+        function gantiHalaman(page) {
+            currentPage = page;
+            cariPerson();
+        }
+       
+        function tampilkanDetailActor(actorId) {
+    const detailActorContainer = $("#detailActorContainer");
+    const trendPeopleContainer = $("#trend-people");  // Add this line
+
+    trendPeopleContainer.hide();  // Add this line
+
+    detailActorContainer.empty();
+
+    // Panggil API untuk mendapatkan detail aktor berdasarkan ID
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: `https://api.themoviedb.org/3/person/${actorId}?api_key=${apiKey}&language=en-US`,
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `${authorization}`
+        }
+    };
+// Menyembunyikan elemen lainnya
+$("#detailPersonContainer, #pagination").hide();
+
+detailActorContainer.show(); // Menampilkan elemen detailActorContainer
+
+
+
+$.ajax(settings).done(function (actor) {
+            console.log(actor);
+
+            const genderText = (actor.gender === 1) ? "Female" : (actor.gender === 2) ? "Male" : "Unknown";
+            const currentYear = new Date().getFullYear();
+            const birthYear = new Date(actor.birthday).getFullYear();
+            const age = currentYear - birthYear;
+            const truncatedBiography = actor.biography.substring(0, 280) + '...';
+            const fullBiography = actor.biography;
+
+            
+            const actorDetail = `
+            <h2>Result Details Person</h2>
+            <p><a class="btn-primary backTo" onclick="backTo()"><i class="fa-solid fa-reply-all"></i> Back</a></p>
+                <div class="row wadahPerson">
+                    <div class="col-md-3">
+                        <img class="imgActor" src="https://image.tmdb.org/t/p/w300/${actor.profile_path}" alt="${actor.name}" class="img-fluid">
+                    </div>
+                   
+                    <div class="col-md-9">
+                        <h2>${actor.name}</h2>
+                        <p>
+                            <strong>Biografi:</strong>
+                            <span id="biography">${truncatedBiography}</span>
+                            <span id="fullBiography" style="display:none">${fullBiography}</span>
+                            <a id="readMoreBtn" onclick="toggleBiography()"><span style="color:#ffff00ad;cursor:pointer;">...read more</span></a>
+                        </p> 
+                        <p><strong>Known For :</strong> ${actor.known_for_department}</p>
+                        <p><strong>popularity :</strong> ${actor.popularity}</p>
+                        <p><strong>Gendre :</strong> ${genderText}</p>
+                        <p><strong>Birthday :</strong> ${actor.birthday} (${age} years old)</p>
+                        <p><strong>Place of Birth :</strong> ${actor.place_of_birth}</p>
+                        <p><strong>Also Known As :</strong> ${actor.also_known_as}</p>
+                    </div>
+                
+                <div class="container mt-5">
+                    <h2>Movies Starring:</h2>
+                    <div class="owl-carousel owl-theme" id="combinedCreditsContainer"></div>
+                </div>
+
+                <div class="container mt-5">
+                    <h2>Acting As:</h2>
+                    <div class="rows" id="actingAs"></div>
+                </div>
+            </div>
+                <div class="container mt-5">
+                    <a class="btn-primary backTo" onclick="backTo()"><i class="fa-solid fa-reply-all"></i> Back</a>
+                </div>
+            `;
+
+            detailActorContainer.append(actorDetail);
+
+            // Load combined credits
+            loadCombinedCredits(actorId);
+        });
+    }
+
+    function loadCombinedCredits(actorId) {
+        const combinedCreditsContainer = $("#combinedCreditsContainer");
+
+        // Panggil API untuk mendapatkan combined credits berdasarkan ID aktor
+        const settings = {
+            async: true,
+            crossDomain: true,
+            url: `https://api.themoviedb.org/3/person/${actorId}/combined_credits?api_key=${apiKey}&language=en-US`,
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: `${authorization}`
+            }
+        };
+
+        $.ajax(settings).done(function (combinedCredits) {
+            console.log(combinedCredits);
+
+            // Initialize actingAsContainer inside loadCombinedCredits
+        const actingAsContainer = $("#actingAs");
+            
+            if (combinedCredits && combinedCredits.cast && combinedCredits.cast.length > 0) {
+                combinedCredits.cast.forEach(credit => {
+                    const posterPath = credit.poster_path ? `https://image.tmdb.org/t/p/w300/${credit.poster_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg';
+
+    // Inisialisasi Owl Carousel pada elemen dengan ID "weekly-trend-tv-show-container"
+    $(document).ready(function () {
+    $("#combinedCreditsContainer").owlCarousel({
+      items: 3,
+      loop: true,
+      margin: 10,
+      autoplay: true,
+      autoplayTimeout: 6000,
+      autoplayHoverPause: true,
+      responsive: {
+        0: { items: 2 },
+        600: { items: 3 },
+        1000: { items: 7 },
+      },
+      nav: true,
+      dots: false,
+      navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+    });
+  });
+    
+ // Use credit.title for movies and credit.name for TV shows
+const title = credit?.title || credit?.name || 'Default Title';
+const releaseDate = credit.release_date || credit.first_air_date;
+const mediaTypeText = credit.media_type === 'movie' ? 'Movie' : credit.media_type === 'tv' ? 'TV' : 'Unknown';
+const itemId = credit.id;
+
+const creditDetail = `
+    <div class="now-playing-movie">
+      <div style="cursor:pointer;" class="overlay">
+         <i class="fas fa-play-circle play-icon"></i>
+        </div>
+        <div class="rang">
+            <i class="fa-solid fa-star"></i>${credit.vote_average.toFixed(1)}
+        </div>
+        <div class="rang-right">${mediaTypeText}</div>
+        <img class="img-creditDetail" src="${credit.poster_path ? `https://image.tmdb.org/t/p/w300/${credit.poster_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg'}" alt="${title}">
+        <div class="card-body">
+            <h5 class="card-title">${title}<span class='yearS'> (${releaseDate ? new Date(releaseDate).getFullYear() : 'Unknown'})</span></h5>
+            <p class="card-text">${releaseDate}</p>
+        </div>
+    </div>
+`;
+
+combinedCreditsContainer.append(creditDetail);
+              
+                    // Tambahan informasi "Acting As"
+                    const actorInfoSettings = {
+                    async: true,
+                    crossDomain: true,
+                    url: `https://api.themoviedb.org/3/person/${actorId}?api_key=${apiKey}&language=en-US`,
+                    method: 'GET',
+                    headers: {
+                        accept: 'application/json',
+                        Authorization: `${authorization}`
+                    }
+                };
+
+                $.ajax(actorInfoSettings).done(function (actorInfo) {
+                    const actingAsDetail = `
+                        <div class="wadahActing">                
+                            <div class="mediaTypeActing">
+                                ${mediaTypeText}
+                            </div>
+                            <div class="movieActing">
+                                <div>${title} ${releaseDate.slice(0, 4)}</div>
+                                <div class="personAs"><span class="actingASspan">${actorInfo.known_for_department}. </span>${credit.character || 'N/A'}</div>
+                            </div>
+                        </div>
+                    `;
+
+                    actingAsContainer.append(actingAsDetail);
+                });
+            });
+        } else {
+            combinedCreditsContainer.append("<p>No combined credits found.</p>");
+        }
+    });
+}
+
+function toggleBiography() {
+    const biographyElement = $("#biography");
+    const fullBiographyElement = $("#fullBiography");
+    const readMoreBtn = $("#readMoreBtn");
+
+    if (biographyElement.is(":visible")) {
+        biographyElement.hide();
+        fullBiographyElement.show();
+        readMoreBtn.html('<span style="color:#ffff00ad;cursor:pointer;">...read less</span>');
+    } else {
+        biographyElement.show();
+        fullBiographyElement.hide();
+        readMoreBtn.html('<span style="color:#ffff00ad;cursor:pointer;">...read more</span>');
+    }
+}
+
+$(document).ready(function () {
+    // Fetch trending people data
+    const trendingPeopleSettings = {
+        async: true,
+        crossDomain: true,
+        url: `https://api.themoviedb.org/3/trending/person/day?language=en-US`,
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `${authorization}`
+        }
+    };
+
+    $.ajax(trendingPeopleSettings).done(function (response) {
+        console.log(response);
+        tampilkanTrendingPeople(response.results);
+    });
+});
+
+function tampilkanTrendingPeople(results) {
+    const trendingPeopleContainer = $("#trending-All-people");
+    trendingPeopleContainer.empty();
+
+    if (results && results.length > 0) {
+        const slicedResults = results.slice(0, 6);
+        slicedResults.forEach(person => {
+            // Modifikasi nama aktor: ganti spasi dengan "-", hilangkan tanda ":"
+            const modifiedName = person.original_name.replace(/ /g, '-').replace(/:/g, '');
+            const profilePath = person.profile_path ? `https://image.tmdb.org/t/p/w300/${person.profile_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg';
+            const personDetail = `
+                <div class="col-md-2 mb-4 resPost">
+                    <a href="#${person.id}/${modifiedName.toLowerCase()}" onclick="tampilkanDetailActor(${person.id})">
+                        <div class="card position-relative">
+                            <div class="overlay overlayPerson">
+                                <i class="fas fa-play-circle play-icon"></i>
+                            </div>
+                            <div class="rang">
+                                <i class="fa-solid fa-star"></i>${person.popularity}
+                            </div>
+                            <div class="rang-right">#</div>
+                            <a href="${profilePath}">
+                                <img src="${profilePath}" class="card-img-top profilePath" style="height:100% !important" alt="${person.original_name}">
+                            </a>
+                            <div class="card-body" style="background-image:none">
+                                <h5 class="card-title">${person.original_name}<span class='yearS'></span></h5>
+                                <p class="card-text">${person.known_for_department}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `;
+            trendingPeopleContainer.append(personDetail);
+          });
+    } else {
+        trendingPeopleContainer.append("<p>Tidak ada hasil person trending ditemukan.</p>");
+    }
+}
+
+
+function backTo() {
+            $("#detailPersonContainer, #pagination").show();
+            $("#detailActorContainer").empty().hide();
+        }
+
+    </script>
+
+</body>
+</html>
