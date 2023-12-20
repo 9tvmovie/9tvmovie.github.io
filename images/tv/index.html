@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" id="metaDescription">
+    <meta name="keywords" content="9tvmovie, 9TVMovie Online, watch Movie & TVShow for Free, Popular Movie">
+    <meta name="author" content="9TVMovie">
+    <title id="metaTitle">Detail Image</title>
+    <!-- Include Bootstrap CSS jika diperlukan -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!---------------------------------
+         Preloader 
+        ----------------------------------->
+    <div class="page-loader text-info" role="status">
+        <div class="loader">Load</div>
+    </div>
+    <!---------------------------------
+           Preloader 
+          ----------------------------------->
+    <header style="display: block;" class="bg-primary text-white text-center py-1">
+        <div class="container">
+            <h1 id="headerTitle">Welcome to 9TVMovie!</h1>
+            <p id="headerTag" class="lead">Discover the latest and most popular films at 9TVMovie. Gain exclusive access to our constantly updated collection, enjoy regular releases, and immerse yourself in quality entertainment. Explore the world of movies at your fingertips!</p>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg bg-dark text-white padd">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">9TVMovie</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+<!-- Movie -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Movie
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/movie/lists/trending.html">Trending Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/nowplay.html">Now Play Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/popular.html">Popular Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/upcoming.html">Upcoming Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/top-rated.html">Top Rated Movie</a></li>
+  </ul>
+</li>
+<!-- TVShow -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      TVShow
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/tv/lists/trending.html">Trending TV Show</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/airing.html">Airing Today TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/onair.html">On The Air TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/popular.html">Popular TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/top-rated.html">Top Rated TV Shhow</a></li>
+      </ul>
+  </li>
+ 
+    <!-- Menudrop submenu "Movie" dan "TV" END -->
+              <li class="nav-item">
+                <a href='/images/' class="nav-link">Images</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/actor/">Actor</a>
+              </li>
+            </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="button" onclick="cariFilm()">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="container mt-5">
+            <h1 id="posterTitle">Poster</h1>
+            <div class="row" id="posterContainer"></div>
+
+            <h1 id="backdropTitle"></h1>
+            <div class="row" id="backdropContainer"></div>
+        </div>
+    </main>
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>Copyright &copy; 2023 <a href="/">9TVMovie</a>. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/9tvmovie.js"></script>
+
+    <script>
+        let showMorePosters = false;
+        let showMoreBackdrops = false;
+        let images = { posters: [], backdrops: [] };
+        let title = '';
+        let tagline = '';
+        let overview = '';
+
+        function updateOverview() {
+    // Tambahkan kode Anda di sini untuk memperbarui bagian overview
+    console.log('Memperbarui overview...');
+}
+
+        const movieId = window.location.hash.match(/#(\d+)/)?.[1];
+
+        if (movieId) {
+            const detailApiUrl = `https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&language=en-US`;
+
+            $.ajax({
+                url: detailApiUrl,
+                method: 'GET',
+                success: function (data) {
+                    console.log('API Response:', data);
+
+                    if (data.name || data.original_name) {
+                        title = data.name || data.original_name;
+                        tagline = data.tagline;
+                        overview = data.overview;
+                        updateTitle();
+                        updateTagline();
+                        updateOverview();
+                    } else {
+                        // Handle invalid or missing data
+                        console.error('Error: Invalid or missing movie details.');
+                        const errorContainer = $('#posterContainer');
+                        errorContainer.append('<p>Error: Invalid or missing movie details.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle AJAX request error
+                    console.error('Error:', error);
+                    console.log('XHR:', xhr);
+                    console.log('Status:', status);
+
+                    // Display an error message
+                    const errorContainer = $('#posterContainer');
+                    errorContainer.append('<p>Error: Unable to fetch movie details.</p>');
+                }
+            });
+
+            const posterApiUrl = `https://api.themoviedb.org/3/tv/${movieId}/images?api_key=${apiKey}&query=poster`;
+            const backdropApiUrl = `https://api.themoviedb.org/3/tv/${movieId}/images?api_key=${apiKey}&query=backdrop`;
+
+
+            $.ajax({
+                url: posterApiUrl,
+                method: 'GET',
+                success: function (data) {
+                    console.log('Number of poster images:', data.posters.length);
+                    console.log('Status of poster API response:', data.status || 'Undefined');
+                    images.posters = data.posters;
+                    tampilkanGambar(images.posters, 'posterContainer');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    console.log('XHR:', xhr);
+                    console.log('Status:', status);
+                }
+            });
+
+            $.ajax({
+                url: backdropApiUrl,
+                method: 'GET',
+                success: function (data) {
+                    console.log('Number of backdrop images:', data.backdrops.length);
+                    console.log('Status of backdrop API response:', data.status || 'Undefined');
+                    images.backdrops = data.backdrops;
+                    tampilkanGambar(images.backdrops, 'backdropContainer');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    console.log('XHR:', xhr);
+                    console.log('Status:', status);
+                }
+            });
+
+        } else {
+            // Display an error message for an invalid movie ID
+            const errorContainer = $('#posterContainer');
+            errorContainer.append('<p>Error: Invalid movie ID.</p>');
+        }
+
+
+        function tampilkanGambar(images, containerId) {
+            const imageContainer = $(`#${containerId}`);
+            imageContainer.empty();
+
+            if (Array.isArray(images) && images.length > 0) {
+                // Periksa apakah images adalah array
+                images.slice(0, containerId.includes('poster') ? (showMorePosters ? images.length : 12) : (showMoreBackdrops ? images.length : 12)).forEach(image => {
+                    const imageUrl = `https://image.tmdb.org/t/p/w300${image.file_path}`;
+                    const posterLarge = `https://image.tmdb.org/t/p/w1280${image.file_path}`;
+                    const imageItem = `
+            <div class="col-md-2 mb-4">
+              <div class="card cardx position-relative">
+                <div class="rang"></div>
+                <a href="${posterLarge}">
+                <img src="${imageUrl}" class="card-img-top posterPath" style="height:100% !important" alt="${title}"></a>
+                <div class="card-body" style="background-image:none">
+                  <h5 class="card-title"><span class='yearS'></span></h5>
+                  <p class="card-text"></p>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+          `;
+                    imageContainer.append(imageItem);
+                });
+
+                if (images.length > 12) {
+                    const showMoreButton = `
+            <div class="col-12 text-center emox">
+              <a class="btn" onclick="${containerId.includes('poster') ? 'toggleShowMorePosters()' : 'toggleShowMoreBackdrops()'}">Show ${containerId.includes('poster') ? (showMorePosters ? 'Less' : 'More') : (showMoreBackdrops ? 'Less' : 'More')}</a>
+            </div>
+          `;
+                    imageContainer.append(showMoreButton);
+                }
+            } else {
+                imageContainer.append('<p>No images available.</p>');
+            }
+        }
+
+        function toggleShowMorePosters() {
+            showMorePosters = !showMorePosters;
+            tampilkanGambar(images.posters, 'posterContainer');
+        }
+
+        function toggleShowMoreBackdrops() {
+            showMoreBackdrops = !showMoreBackdrops;
+            tampilkanGambar(images.backdrops, 'backdropContainer');
+        }
+
+        function updateTitle() {
+            $('#metaTitle').text(`Image Poster ${title} :: ${tagline} :: 9TVMovie`);
+            $('#headerTitle').text(`${title}`);
+            $('#headerTag').text(`${tagline}`);
+            $('#posterTitle').text(`Posters:`);
+            $('#backdropTitle').text(`Images:`);
+        }
+
+        function updateTagline() {
+            // Update deskripsi meta dengan tagline
+            const metaDescriptionElement = document.getElementById("metaDescription");
+            metaDescriptionElement.content = `${title} - ${tagline} ${overview}`;
+        }
+
+        
+        // Panggil fungsi tampilkanGambar pada permulaan skrip
+        tampilkanGambar(images.posters, 'posterContainer');
+        tampilkanGambar(images.backdrops, 'backdropContainer');
+    </script>
+</body>
+
+</html>
