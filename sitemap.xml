@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static HTML Sitemap</title>
+</head>
+<body>
+
+  <script>
+    document.write('<?xml version="1.0" encoding="UTF-8"?>');
+    document.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+
+    // Your list of URLs
+    var urls = [
+      'https://9tvmovie.github.io/',
+      'https://9tvmovie.github.io/movie/lists/trending.html',
+      // Add more URLs as needed
+    ];
+
+    // Loop through URLs and generate sitemap entries
+    for (var i = 0; i < urls.length; i++) {
+      document.write('<url>');
+      document.write('<loc>' + urls[i] + '</loc>');
+      document.write('<changefreq>weekly</changefreq>');
+      document.write('<priority>0.8</priority>');
+      document.write('</url>');
+    }
+
+    document.write('</urlset>');
+  </script>
+
+</body>
+</html>
