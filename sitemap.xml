@@ -48,25 +48,25 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  </url>
+  <url>
    <loc>https://9tvmovie.github.io/tv/lists/popular.html</loc>
     <lastmod>2023-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  </url>
+  <url>
    <loc>https://9tvmovie.github.io/tv/lists/top-rated.html</loc>
     <lastmod>2023-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
- </url>
+ <url>
    <loc>https://9tvmovie.github.io/images/</loc>
     <lastmod>2023-12-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-   </url>
+   <url>
    <loc>https://9tvmovie.github.io/actor/</loc>
     <lastmod>2023-12-21</lastmod>
     <changefreq>weekly</changefreq>
