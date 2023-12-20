@@ -18,7 +18,7 @@ main {
   min-height: 71vh;
 }
 h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
  @media (min-width: 1200px){
@@ -39,7 +39,36 @@ h1 {
     .row>* {
       width: 50%;
     }
+    .card-title {
+      font-size: 12px !important;
   }
+
+    #suggestions {
+      right: 106px;
+  }
+
+.wadahPerson>* {
+    width: 100%;
+}
+.imgActor {
+  width: 80%;
+    padding-left: 70px;
+    padding-bottom: 15px;
+}
+.rowAs {
+  --bs-gutter-x: 0.3rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-1.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+.movieActing {
+  width: 75%;
+}
+  }
+
 
   /* @media (max-width: 767px) and (orientation: landscape){
     .resPost {
@@ -133,7 +162,16 @@ h1 {
     transition: opacity 0.3s ease;
     z-index: 999;
   }
+  .overlayPerson {
+    z-index: unset !important;
+  }
   .card:hover .overlay {
+    opacity: 1;
+  }
+  .now-playing-movie:hover .overlay {
+    opacity: 1;
+  }
+  .now-playing-tv-show:hover .overlay {
     opacity: 1;
   }
   .play-icon {
@@ -158,12 +196,15 @@ h1 {
   }
 
   .navbar-toggler {
-    padding: 0px 5px;
+    padding: 0px 2px;
     color: var(--bs-navbar-color);
     background-color: #cbd3db;
-    border: 2px solid;
+    border: 1px solid;
   }
-
+  .navbar-toggler-icon {
+    width: 1.3em !important;
+    height: 1.3em !important;
+  }
   .emox {
     margin-bottom: 1.5rem!important;
   }
@@ -176,7 +217,31 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    cursor: pointer;
   }
+  .fa-reply-all {
+    /* transform: rotate(90deg); */
+    font-size: 30px;
+    position: relative;
+    left: -1%;
+    top: 8px;
+}
+.backTo {
+  cursor: pointer;
+  text-decoration-line: none;
+}
+.movieColor {
+  color:#00b2ff;
+}
+.tvColor {
+  color:#fb00ed;
+}
+.combinedCredits {
+display: flex;
+    overflow: overlay;
+}
+
 
   /* loading page */
   .page-loader {
@@ -210,3 +275,44 @@ h1 {
       transform: rotate(360deg);
     }
   }
+
+  a.moreList {
+    color: #bdb7b7;
+    text-decoration: none;
+  }
+  a.moreList:hover {
+   color:#00b2ff;
+  }
+  .moreListArrow {
+    font-size: 24px;
+  }
+  .wadahActing {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #80808040;
+    padding-top: 10px;
+    align-items: baseline;
+  }
+  .wadahActing:hover {
+    background-color: #0266fb05;
+  }
+  .mediaTypeActing {
+    width: 80px;
+  }
+  .actingASspan {
+    color:#befb028f;
+  }
+  .personAs {
+    font-family: system-ui;
+  }
+  .movieActing {
+   
+  }
+  .rowAs {
+     
+  }
+
+  .img-creditDetail {
+ 
+  }
+
