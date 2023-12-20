@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover the latest and most popular films at 9TVMovie. Gain exclusive access to our constantly updated collection, enjoy regular releases, and immerse yourself in quality entertainment. Explore the world of movies at your fingertips!">
+    <meta name="keywords" content="9tvmovie, 9TVMovie Online, watch Movie & TVShow for Free, Popular Movie">
+    <meta name="author" content="9TVMovie">
+  <title>Search Movie & TVShow :: 9TVMovie</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <!-- Tambahkan FontAwesome jika belum ada -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
+  <style></style>
+</head>
+<body>
+  <!---------------------------------
+     Preloader 
+    ----------------------------------->
+    <div class="page-loader text-info" role="status">
+      <div class="loader">Load</div>
+    </div>
+    <!---------------------------------
+     Preloader 
+    ----------------------------------->
+    <header class="bg-primary text-white text-center py-1">
+        <div class="container">
+            <h1>Welcome to 9TVMovie!</h1>
+            <p class="lead">Discover the latest and most popular films at 9TVMovie. Gain exclusive access to our constantly updated collection, enjoy regular releases, and immerse yourself in quality entertainment. Explore the world of movies at your fingertips!</p>
+        </div>
+    </header>
+  
+      <nav class="navbar navbar-expand-lg bg-dark text-white padd">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">9TVMovie</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+ <!-- Movie -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Movie
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/movie/lists/trending.html">Trending Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/nowplay.html">Now Play Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/popular.html">Popular Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/upcoming.html">Upcoming Movie</a></li>
+    <li><a class="dropdown-item" href="/movie/lists/top-rated.html">Top Rated Movie</a></li>
+  </ul>
+</li>
+<!-- TVShow -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      TVShow
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/tv/lists/trending.html">Trending TV Show</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/airing.html">Airing Today TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/onair.html">On The Air TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/popular.html">Popular TV Shhow</a></li>
+        <li><a class="dropdown-item" href="/tv/lists/top-rated.html">Top Rated TV Shhow</a></li>
+      </ul>
+  </li>
+  
+    <!-- Menudrop submenu "Movie" dan "TV" END -->
+              <li class="nav-item">
+                <a href='/images/' class="nav-link">Images</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/actor/">Actor</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="button" onclick="cariFilm()">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+     <main>
+      <div id="trend-image" class="container mt-5">
+      <div id="trending-All" class="row"></div>
+    </div>
+
+      <div class="container mt-5">
+    <div class="row" id="results"></div>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination pege" id="pagination"></ul>
+    </nav>
+  </div>
+</main>
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+        <p>Copyright &copy; 2023 <a href="/">9TVMovie</a>. All Rights Reserved.</p>
+    </div>
+</footer>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/9tvmovie.js"></script>
+  <script>
+    let currentPage = 1;
+
+    function cariFilm() {
+      const keyword = $('#searchInput').val();
+      const apiUrl = `https://api.themoviedb.org/3/search/multi?include_adult=false&language=en-US&page=${currentPage}&api_key=${apiKey}&query=${keyword}`;
+
+      $.ajax({
+        url: apiUrl,
+        method: 'GET',
+        success: function(data) {
+          tampilkanHasilPencarian(data.results);
+          tampilkanPagination(data.total_pages);
+       // Toggle visibility of trend-image based on search results
+       const trendImageContainer = $('#trend-image');
+                trendImageContainer.toggle(data.results.length === 0);
+            },
+        error: function(error) {
+          console.error('Error:', error);
+        }
+      });
+    }
+
+    function tampilkanHasilPencarian(results) {
+      const resultsContainer = $('#results');
+      resultsContainer.empty();
+
+      if (results.length === 0) {
+        resultsContainer.append('<p>Tidak ada hasil ditemukan.</p>');
+        return;
+      }
+
+      results.forEach(item => {
+        const posterPath = item.poster_path ? `https://image.tmdb.org/t/p/w300${item.poster_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg';
+        const title = item.title || item.name;
+        const type = item.media_type === 'movie' ? 'movie' : 'tv';
+        const releaseDate = (type === 'movie' && item.release_date) ? new Date(item.release_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) :
+                           (type === 'tv' && item.first_air_date) ? new Date(item.first_air_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) :
+                           'n/a';
+        const mtYear = (type === 'movie' && item.release_date) ? '(' +  new Date(item.release_date).getFullYear() + ')': (type === 'tv' && item.first_air_date) ? '(' +  new Date(item.first_air_date).getFullYear() + ')' : '';
+        const roundedVoteAverage = item.vote_average ? item.vote_average.toFixed(1) : 'n/a';
+        const titleOri = item.original_title ? item.original_title: '';
+
+        const resultItem = `
+          <div class="col-md-2 mb-4 resPost">
+            <div class="card position-relative">
+              <div class="overlay">
+                <a href="/images/${type}#${item.id}/${title.replace(/\s+/g, '-').toLowerCase()}.html" target="_blank"><i class="fas fa-play-circle play-icon"></i></a>
+
+
+              </div>
+              <div class="rang"><i class="fa-solid fa-star"></i>
+                ${roundedVoteAverage}
+              </div>
+              <div class="rang-right">${type}</div>
+              <img src="${posterPath}" class="card-img-top posterPath" alt="${title} ${titleOri}">
+              <div class="card-body">
+                <h5 class="card-title">${title}<span class='yearS'>${mtYear}</span></h5>
+                <p class="card-text">${releaseDate}</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+        resultsContainer.append(resultItem);
+      });
+    // Toggle visibility of trend-image based on search results
+    const trendImageContainer = $('#trend-image');
+        trendImageContainer.toggle(results.length === 0);
+    }
+
+    
+    // Fetch and display trending data
+    const trendingSettings = {
+            async: true,
+            crossDomain: true,
+            url: 'https://api.themoviedb.org/3/trending/all/day?language=en-US',
+            method: 'GET',
+            headers: {
+            'Accept': 'application/json',
+            'Authorization': `${authorization}`
+            }
+        };
+
+        $.ajax(trendingSettings).done(function (trendingResponse) {
+            console.log(trendingResponse);
+
+            // Call a function to display trending data in the "trending-All" div
+            displayTrendingData(trendingResponse.results);
+        });
+
+        function displayTrendingData(trendingResults) {
+    const trendingContainer = $('#trending-All');
+    trendingContainer.empty();
+
+    // Limit the number of items to display (in this case, 6 items)
+    const trendingItemsToDisplay = trendingResults.slice(0, 6);
+
+    trendingItemsToDisplay.forEach(trendingItem => {
+        const posterPath = trendingItem.poster_path ? `https://image.tmdb.org/t/p/w300${trendingItem.poster_path}` : 'https://sportxyou.github.io/movie-tv/img/noposter.jpg';
+        const title = trendingItem.title || trendingItem.name;
+        const type = trendingItem.media_type === 'movie' ? 'movie' : 'tv';
+        const releaseDate = (type === 'movie' && trendingItem.release_date) ? new Date(trendingItem.release_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) :
+            (type === 'tv' && trendingItem.first_air_date) ? new Date(trendingItem.first_air_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) :
+            'n/a';
+        const mtYear = (type === 'movie' && trendingItem.release_date) ? '(' + new Date(trendingItem.release_date).getFullYear() + ')' : (type === 'tv' && trendingItem.first_air_date) ? '(' + new Date(trendingItem.first_air_date).getFullYear() + ')' : '';
+        const roundedVoteAverage = trendingItem.vote_average ? trendingItem.vote_average.toFixed(1) : 'n/a';
+        const titleOri = trendingItem.original_title ? trendingItem.original_title : '';
+
+        const trendingItemHTML = `
+            <div class="col-md-2 mb-4 resPost">
+                <div class="card position-relative">
+                    <div class="overlay">
+                        <a href="/images/${type}#${trendingItem.id}/${title.replace(/\s+/g, '-').toLowerCase()}.html" target="_blank">
+                            <i class="fas fa-play-circle play-icon"></i>
+                        </a>
+                    </div>
+                    <div class="rang">
+                        <i class="fa-solid fa-star"></i>
+                        ${roundedVoteAverage}
+                    </div>
+                    <div class="rang-right">${type.toUpperCase()}</div>
+                    <img src="${posterPath}" class="card-img-top posterPath" alt="${title} ${titleOri}">
+                    <div class="card-body">
+                        <h5 class="card-title">${title}<span class='yearS'>${mtYear}</span></h5>
+                        <p class="card-text">${releaseDate}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        trendingContainer.append(trendingItemHTML);
+    });
+}
+
+
+    function tampilkanPagination(totalPages) {
+      const paginationContainer = $('#pagination');
+      paginationContainer.empty();
+
+      if (totalPages > 10) {
+        // Tampilkan tombol prev
+        const prevItem = `<li class="page-item"><a class="page-link" href="#" onclick="gantiHalaman(${currentPage - 1})">Previous</a></li>`;
+        paginationContainer.append(prevItem);
+      }
+
+      for (let i = 1; i <= totalPages; i++) {
+        // Tampilkan tombol hanya untuk 10 halaman pertama dan halaman aktif
+        if (i <= 10 || (i > 10 && i === totalPages) || (i > 10 && i === currentPage) || (i > 10 && i === currentPage - 1) || (i > 10 && i === currentPage + 1)) {
+          const pageItem = `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" onclick="gantiHalaman(${i})">${i}</a></li>`;
+          paginationContainer.append(pageItem);
+        }
+      }
+
+      if (totalPages > 10) {
+        // Tampilkan tombol next
+        const nextItem = `<li class="page-item"><a class="page-link" href="#" onclick="gantiHalaman(${currentPage + 1})">Next</a></li>`;
+        paginationContainer.append(nextItem);
+      }
+    }
+
+    function gantiHalaman(page) {
+      currentPage = page;
+      cariFilm();
+    }
+  </script>
+</body>
+</html>
