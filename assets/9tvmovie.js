@@ -7,7 +7,7 @@ const authorization = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YTcwYTMwYjk1ODE5Y
 (function () {
     $(window).on("load", function () {
       $(".loader").fadeOut();
-      $(".page-loader").delay(1000).fadeOut("slow");
+      $(".page-loader").delay(3000).fadeOut("slow");
     });
     $(document).ready(function () {});
   })(jQuery);
