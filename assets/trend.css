@@ -92,6 +92,8 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 
 /* Responsiveness */
 @media (max-width: 768px) {
+   /* Force two columns on mobile */
+    .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     #modalContent { margin: 6% 6%; padding: 14px; }
     #modalBackdrop { min-height: 160px; margin-bottom: 10px; }
     /* Stack layout: poster above details */
