@@ -3,8 +3,8 @@ h1 { margin-bottom:20px;}
 .controls { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;align-items: baseline;}
 select, button { padding:6px 12px; border-radius:5px; border:none; background:#222; color:#fff; cursor:pointer;}
 .movie-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:15px;}
-.movie { background:#222; padding:10px; border-radius:8px; text-align:left; transition:0.3s;}
-.movie img { width:100%; border-radius:6px; min-height:240px; object-fit:cover; cursor: pointer;}
+.movie { background:#222; padding:10px; border-radius:8px; text-align:left; transition:0.3s; position: relative; overflow: hidden; }
+.movie img { width:100%; border-radius:6px; min-height:240px; object-fit:cover; cursor: pointer; display:block; }
         .movie .title { margin-top:8px; font-weight:bold; 
             display: -webkit-box; 
             -webkit-line-clamp: 1; 
@@ -14,9 +14,28 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
             max-height: 3.2em; /* fallback to limit height (approx 2 lines) */
             line-height: 1.6em;
         }
-.movie .rating { font-size: 13px;
-    position: absolute; margin: 4px  4px 4px 107px; padding: 2px 4px; color: gold; border-radius: 4px;background: #222222bd; }
-.movie .media-type-icon { position: absolute;font-size: 16px; margin: 4px; padding: 2px 4px;color: #ffffff; border-radius: 4px; background: #0070ffba }
+.movie .rating {
+    font-size: 13px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 6px;
+    color: gold;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.6);
+    z-index: 5;
+}
+.movie .media-type-icon {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 12px;
+    padding: 4px 6px;
+    color: #ffffff;
+    border-radius: 6px;
+    background: #0070ffba;
+    z-index: 5;
+}
 .movie .status { font-size:13px; opacity:0.8; margin-top:3px; }
 .movie .country { font-size:14px; opacity:0.7; }
 #loader { display:none; text-align:center; margin:20px; font-size:24px; }
