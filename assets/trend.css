@@ -1,0 +1,162 @@
+body { font-family: Arial,sans-serif; background:#111; color:#fff; margin:0; padding:20px;}
+h1 { margin-bottom:20px;}
+.controls { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px;align-items: baseline;}
+select, button { padding:6px 12px; border-radius:5px; border:none; background:#222; color:#fff; cursor:pointer;}
+.movie-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:15px;}
+.movie { background:#222; padding:10px; border-radius:8px; text-align:left; transition:0.3s;}
+.movie img { width:100%; border-radius:6px; min-height:240px; object-fit:cover; cursor: pointer;}
+        .movie .title { margin-top:8px; font-weight:bold; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 1; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            max-height: 3.2em; /* fallback to limit height (approx 2 lines) */
+            line-height: 1.6em;
+        }
+.movie .rating { font-size: 13px;
+    position: absolute; margin: 4px  4px 4px 107px; padding: 2px 4px; color: gold; border-radius: 4px;background: #222222bd; }
+.movie .media-type-icon { position: absolute;font-size: 16px; margin: 4px; padding: 2px 4px;color: #ffffff; border-radius: 4px; background: #0070ffba }
+.movie .status { font-size:13px; opacity:0.8; margin-top:3px; }
+.movie .country { font-size:14px; opacity:0.7; }
+#loader { display:none; text-align:center; margin:20px; font-size:24px; }
+.pagination { margin-top:20px; text-align:center; }
+.pagination button { background:#333; color:#fff; border:none; padding:6px 12px; margin:3px; cursor:pointer; border-radius:5px;}
+.pagination button.active { background:#4CAF50; font-weight:bold;}
+.pagination button:disabled { opacity:0.3; cursor:not-allowed;}
+.pagination span { margin:0 3px; font-size:16px;}
+
+/* Modal Styles (Netflix-like) */
+#modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); z-index: 1000; overflow-y: auto; }
+
+/* Responsive modal layout: on wide screens show poster on the left and details on the right; on small screens stack vertically */
+#modalContent {
+    position: relative;
+    max-width: 1100px;
+    margin: 4% auto;
+    background: #000408;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+}
+
+#closeModal { position: absolute; top: 12px; right: 18px; font-size: 30px; cursor: pointer; color: #fff; z-index: 3; background: transparent; border: none; }
+
+#modalBackdrop { width: 100%; min-height: 220px; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; position: relative; margin: -20px -20px 12px -20px; }
+#modalBackdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35)); border-radius: 8px 8px 0 0; }
+
+/* Poster (desktop uses a left column; mobile becomes inline) */
+#modalPoster {
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    z-index: 2;
+}
+
+#modalDetails { z-index: 2; }
+
+/* Subtle small backdrop image under the poster */
+#modalBackdropImage { display: none; }
+
+#modalTitle { font-size: 26px; margin-bottom: 10px; }
+#modalMeta { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; font-size: 14px; color: #d9cd71; }
+.meta-item { background: rgba(255,255,255,0.02); padding: 6px 10px; border-bottom: 1px solid rgba(128,128,128,0.22); line-height: 1.2; }
+.meta-label { opacity: 0.8; margin-right: 6px; }
+.meta-value { font-weight: 600; color: #2c9dc1; }
+#modalOverview { margin-bottom: 16px; font-size: 15px; line-height: 1.5; }
+#modalTrailer { margin-top: 18px; }
+#modalTrailer iframe { width: 100%; height: 360px; border: none; border-radius: 8px; }
+
+/* Gallery overlay as grid of poster cards */
+#galleryOverlay { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.92); z-index: 2000; display:none; align-items:center; justify-content:center; }
+#galleryInner { max-width: 1100px; width: calc(100% - 80px); margin: 40px auto; position: relative; padding: 20px 0; max-height: calc(100vh - 120px); overflow:auto; }
+#galleryGrid { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:12px; align-items:start; }
+#galleryGridBackdrop { display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap:12px; align-items:start; }
+.gallery-card { background: #0b0c0d; border-radius:8px; padding:6px; display:flex; flex-direction:column; gap:6px; z-index: 1;}
+.gallery-backdrop-card {z-index: 1;}
+.gallery-card img { width:100%; height:200px; object-fit:cover; border-radius:6px; display:block; }
+.gallery-backdrop-card img {
+    width: 250px;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+.gallery-card .card-meta { font-size:12px; color:#ddd; text-align:center; }
+#galleryClose { position:absolute; right:90px; top:25px; font-size:28px; background:transparent; border:none; color:#fff; cursor:pointer;z-index: 3; }
+@media (max-width: 600px) {
+    #galleryGrid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap:10px; }
+    .gallery-card img { height:auto; }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    #modalContent { margin: 6% 6%; padding: 14px; }
+    #modalBackdrop { min-height: 160px; margin-bottom: 10px; }
+    /* Stack layout: poster above details */
+    #modalPoster { width: 140px; margin: -70px auto 12px auto; position: relative; display: block; }
+    #modalDetails { display: block; margin: 0; padding: 8px; }
+    #modalTitle { font-size: 20px; }
+    #modalMeta { width: 100%; font-size: 13px; }
+    #modalOverview { font-size: 14px; }
+    #modalTrailer iframe { height: 220px; }
+    .meta-item { padding: 6px 8px; }
+}
+
+/* Desktop grid layout */
+@media (min-width: 900px) {
+    #modalContent { display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: start; padding: 24px; }
+    /* backdrop spans full width above grid */
+    #modalBackdrop { grid-column: 1 / -1; height: 340px; margin: -24px -24px 8px -24px; border-radius: 8px; }
+    /* place poster in left column overlapping the backdrop */
+    #modalPoster { width: 220px; grid-column: 1; margin-top: -80px; margin-left: 10px; position: relative; }
+    #modalDetails { grid-column: 2; position: relative; margin: 6px 0 0 0; padding: 6px 10px; }
+    #modalTrailer iframe { height: 315px; }
+    #modalBackdropImage { display: block; position: absolute; left: 33px; top: 650px; width: 220px; height: 120px; border-radius:8px; object-fit:cover; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+}
+
+/* Desktop: arrange meta blocks side-by-side */
+@media (min-width: 900px) {
+    /* use a two-column grid so both meta blocks have identical width */
+    .modalMC { display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 20px; align-items: start; }
+    #modalMeta, #modalMeta-cast { width: 100%; max-width: none; flex: none; }
+    #modalMeta-cast { margin-top: 0; padding-top: 0; }
+}
+
+.modalMC {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+#modalMeta-cast {
+    /* margin-top: 10px; */
+    /* padding-top: 8px; */
+    /* border-top: 1px solid #333; */
+    font-size: 14px;
+}
+
+.cast-item {
+    margin-bottom: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.22);
+    line-height: 1.2;
+}
+
+.cast-name {
+    font-weight: 600;
+    color: #d9cd71;
+}
+
+.cast-role {
+    color: #2c9dc1;
+    font-size: 12px;
+    margin-left: 4px;
+}
+.as {
+    font-style: italic;
+    opacity: 0.8;
+    color: #a4aab1;
+}
