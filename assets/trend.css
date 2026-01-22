@@ -17,8 +17,8 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 .movie .rating {
     font-size: 13px;
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 13px;
+    right: 13px;
     padding: 4px 6px;
     color: gold;
     border-radius: 6px;
@@ -27,8 +27,8 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 }
 .movie .media-type-icon {
     position: absolute;
-    top: 8px;
-    left: 8px;
+    top: 13px;
+    left: 13px;
     font-size: 12px;
     padding: 4px 6px;
     color: #ffffff;
