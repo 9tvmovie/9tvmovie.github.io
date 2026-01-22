@@ -29,7 +29,7 @@
 
 
 <!-- Search -->
-<div style="margin-bottom:14px; display:flex; gap:8px; align-items:baseline;">
+<div style="margin-bottom:14px; display:flex; gap:8px; align-items:baseline;flex-wrap: wrap;">
     <input id="searchInput" type="search" placeholder="Search movies or TV..." style="width: 260px; height: 30px; flex: 1; padding: 8px; border-radius: 6px; border: 1px solid #333; background: #111; color: #fff;" onkeydown="if(event.key==='Enter')doSearch()">
     <button onclick="doSearch()">Search</button>
     <button onclick="clearSearch()">Clear</button>
