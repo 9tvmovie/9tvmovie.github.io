@@ -62,7 +62,7 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 
 #closeModal { position: absolute; top: 12px; right: 10px; font-size: 30px; cursor: pointer; color: #fff; z-index: 2; background: transparent; border: none; }
 
-#modalBackdrop { width: 100%; min-height: 220px; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; position: relative; margin: -20px -20px 12px -20px; }
+#modalBackdrop { width: 100%; min-height: 220px; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; position: absolute; margin: -20px -20px 12px -20px;filter: brightness(0.6); opacity: 0.5; }
 #modalBackdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35)); border-radius: 8px 8px 0 0; }
 
 /* Poster (desktop uses a left column; mobile becomes inline) */
@@ -80,7 +80,7 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 
 #modalTitle { font-size: 26px; margin-bottom: 10px; }
 #modalMeta { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; font-size: 14px; color: #d9cd71; }
-.meta-item { background: rgba(255,255,255,0.02); padding: 6px 10px; border-bottom: 1px solid rgba(128,128,128,0.22); line-height: 1.2; }
+.meta-item { /*background: rgba(255,255,255,0.02);*/ padding: 6px 10px; border-bottom: 1px solid rgba(128,128,128,0.22); line-height: 1.2; }
 .meta-label { opacity: 0.8; margin-right: 6px; }
 .meta-value { font-weight: 600; color: #2c9dc1; }
 #modalOverview { margin-bottom: 16px; font-size: 15px; line-height: 1.5; }
@@ -88,12 +88,11 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 #modalTrailer iframe { width: 100%; height: 360px; border: none; border-radius: 8px; }
 
 /* Gallery overlay as grid of poster cards */
-#galleryOverlay { display:none; position:fixed; inset:0; background: rgba(0,0,0,0.92); z-index: 2000; display:none; align-items:center; justify-content:center; }
+#galleryOverlay { display:none; position:fixed; inset:0; background: rgb(16 16 16); z-index: 2000; display:none; align-items:center; justify-content:center; }
 #galleryInner { max-width: 1100px; width: calc(100% - 80px); margin: 40px auto; position: relative; padding: 20px 0; max-height: calc(100vh - 120px); overflow:auto; }
 #galleryGrid { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:12px; align-items:start; }
 #galleryGridBackdrop { display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap:12px; align-items:start; }
 .gallery-card { background: #0b0c0d; border-radius:8px; padding:6px; display:flex; flex-direction:column; gap:6px; z-index: 1;}
-.gallery-backdrop-card {z-index: 1;}
 .gallery-card img { width:100%; height:200px; object-fit:cover; border-radius:6px; display:block; }
 .gallery-backdrop-card img {
     width: 250px;
@@ -103,23 +102,36 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
     display: block;
 }
 .gallery-card { position: relative; }
-.gallery-backdrop-card { position: relative; }
+.gallery-backdrop-card { 
+    position: relative;
+    background: #0b0c0d;
+    border-radius: 8px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 1;
+ }
 .gallery-download-btn {
     position: absolute;
     right: 10px;
     bottom: 1px;
-    background: rgb(33 173 243 / 51%);
+    background: rgb(33 173 243 / 0%);
     color: #fff;
     border: none;
-    padding: 1px 15px;
+    padding: 1px 2px 1px 20px;
+    /* margin-left: 13px; */
     border-radius: 6px;
     z-index: 4;
     font-size: 14px;
     line-height: 1;
     cursor: pointer;
 }
-.gallery-download-btn:hover { background: rgba(0,0,0,0.85); transform: translateY(-1px); }
-.gallery-card .card-meta { 
+.gallery-download-btn:hover { 
+    background: rgb(0 0 0 / 0%);
+    transform: translateY(-1px);
+ }
+.gallery-card .card-meta, .gallery-backdrop-card .card-meta { 
     font-size: 12px;
     color: #ddd;
     margin-left: 4px;
@@ -136,27 +148,39 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
     /* Force two columns on mobile */
     .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     #modalContent { margin: 6% 6%; padding: 14px; }
-    #modalBackdrop { min-height: 160px; margin-bottom: 10px; }
+    #modalBackdrop { 
+        min-height: 220px;
+        margin: 0 auto;
+        right: 0px;
+    }
     /* Stack layout: poster above details */
-    #modalPoster { width: 140px; margin: -70px auto 12px auto; position: relative; display: block; }
+    #modalPoster { width: 140px; margin: 12px auto 12px auto; position: relative; display: block; }
     #modalDetails { display: block; margin: 0; padding: 8px; }
     #modalTitle { font-size: 20px; }
     #modalMeta { width: 100%; font-size: 13px; }
     #modalOverview { font-size: 14px; }
     #modalTrailer iframe { height: 220px; }
     .meta-item { padding: 6px 8px; }
+    #modalBackdropImage { 
+        margin: 25px auto;
+    } 
 }
 
 /* Desktop grid layout */
 @media (min-width: 900px) {
     #modalContent { display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: start; padding: 24px; }
     /* backdrop spans full width above grid */
-    #modalBackdrop { grid-column: 1 / -1; height: 340px; margin: -24px -24px 8px -24px; border-radius: 8px; }
+    #modalBackdrop { 
+        /*grid-column: 1 / -1; */
+        height: 450px;
+        margin: 0px auto;
+        border-radius: 8px;
+     }
     /* place poster in left column overlapping the backdrop */
-    #modalPoster { width: 220px; grid-column: 1; margin-top: -80px; margin-left: 10px; position: relative; }
+    #modalPoster { width: 220px; grid-column: 1; margin-top: 0px; margin-left: 10px; position: relative; }
     #modalDetails { grid-column: 2; position: relative; margin: 6px 0 0 0; padding: 6px 10px; }
     #modalTrailer iframe { height: 315px; }
-    #modalBackdropImage { display: block; position: absolute; left: 33px; top: 650px; width: 220px; height: 120px; border-radius:8px; object-fit:cover; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    #modalBackdropImage { display: block; position: absolute; left: 33px; top: 400px; width: 220px; height: 120px; border-radius:8px; object-fit:cover; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
 }
 
 /* Desktop: arrange meta blocks side-by-side */
@@ -182,7 +206,7 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 
 .cast-item {
     margin-bottom: 6px;
-    background: rgba(255, 255, 255, 0.02);
+    /*background: rgba(255, 255, 255, 0.02);*/
     padding: 6px 10px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.22);
     line-height: 1.2;
