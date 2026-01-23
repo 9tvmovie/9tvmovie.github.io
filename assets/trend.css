@@ -60,7 +60,7 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
     box-shadow: 0 6px 30px rgba(0,0,0,0.6);
 }
 
-#closeModal { position: absolute; top: 12px; right: 18px; font-size: 30px; cursor: pointer; color: #fff; z-index: 3; background: transparent; border: none; }
+#closeModal { position: absolute; top: 12px; right: 10px; font-size: 30px; cursor: pointer; color: #fff; z-index: 2; background: transparent; border: none; }
 
 #modalBackdrop { width: 100%; min-height: 220px; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; position: relative; margin: -20px -20px 12px -20px; }
 #modalBackdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35)); border-radius: 8px 8px 0 0; }
@@ -102,8 +102,30 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
     border-radius: 6px;
     display: block;
 }
-.gallery-card .card-meta { font-size:12px; color:#ddd; text-align:center; }
-#galleryClose { position:absolute; right:90px; top:25px; font-size:28px; background:transparent; border:none; color:#fff; cursor:pointer;z-index: 3; }
+.gallery-card { position: relative; }
+.gallery-backdrop-card { position: relative; }
+.gallery-download-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 1px;
+    background: rgb(33 173 243 / 51%);
+    color: #fff;
+    border: none;
+    padding: 1px 15px;
+    border-radius: 6px;
+    z-index: 4;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+.gallery-download-btn:hover { background: rgba(0,0,0,0.85); transform: translateY(-1px); }
+.gallery-card .card-meta { 
+    font-size: 12px;
+    color: #ddd;
+    margin-left: 4px;
+    text-align: left;
+ }
+#galleryClose { position:fixed; right:30px; top:1px; font-size:28px; background:transparent; border:none; color:#fff; cursor:pointer;z-index: 3; }
 @media (max-width: 600px) {
     #galleryGrid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap:10px; }
     .gallery-card img { height:auto; }
@@ -111,7 +133,7 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 
 /* Responsiveness */
 @media (max-width: 768px) {
-   /* Force two columns on mobile */
+    /* Force two columns on mobile */
     .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     #modalContent { margin: 6% 6%; padding: 14px; }
     #modalBackdrop { min-height: 160px; margin-bottom: 10px; }
