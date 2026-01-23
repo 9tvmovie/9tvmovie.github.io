@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <title>Trending Movies & TV Shows</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="/assets/trend.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -72,6 +71,25 @@
             <div id="modalMeta-cast"></div>
             </div>
             <p id="modalOverview"></p>
+
+            <!-- GEMINI AI -->
+             <div style="margin-top:16px;">
+    <button onclick="generateAIContent()" style="background:#7c4dff;">
+        ✨ Generate Title, Description & Hashtag
+    </button>
+</div>
+
+<div id="aiResult" style="margin-top:14px; display:none;">
+    <h3>AI Content</h3>
+    <div><strong>Title:</strong> <span id="aiTitle"></span></div>
+    <div><strong>Description:</strong>
+        <p id="aiDescription"></p>
+    </div>
+    <div><strong>Hashtags:</strong>
+        <p id="aiHashtags"></p>
+    </div>
+</div>
+            <!-- END GEMINI AI -->
             <div id="modalTrailer"></div>
             <!-- Gallery overlay (hidden until opened) -->
             <div id="galleryOverlay" aria-hidden="true">
@@ -909,6 +927,156 @@ try{
     const t = document.getElementById('titleLink');
     if(t) t.addEventListener('click', goToTrend);
 }catch(e){}
+</script>
+
+<script>
+  // ⛔️ JANGAN TARUH API KEY DI PRODUCTION
+  const GEMINI_API_KEY = "AIzaSyBq4plwo8UeTNNZtR2b34RcTIp-AiohlGs";
+
+  async function generateAIContent(){
+    const modal = document.getElementById('modalDetails');
+    if(!modal){
+      alert("Modal tidak ditemukan");
+      return;
+    }
+
+    const mediaId = modal.getAttribute('data-media-id');
+    const mediaType = modal.getAttribute('data-media-type');
+
+    if(!mediaId || !mediaType){
+      alert("Data film tidak ditemukan");
+      return;
+    }
+
+    // Ambil data dari modal
+    const title = document.getElementById('modalTitle')?.textContent || "";
+    const overview = document.getElementById('modalOverview')?.textContent || "";
+    const metaText = document.getElementById('modalMeta')?.innerText || "";
+
+    if(!title || !overview){
+      alert("Konten film belum lengkap");
+      return;
+    }
+
+    const prompt = `
+Buatkan konten video short tentang film berikut:
+
+Judul: ${title}
+Detail: ${metaText}
+Sinopsis: ${overview}
+
+Aturan output:
+1. Title maksimal 12 kata, clickbait, tanpa spoiler
+2. Description 2–3 kalimat, bahasa santai
+3. 5 hashtag relevan (tanpa simbol # di awal kalimat)
+
+Target: TikTok & YouTube Shorts
+Bahasa: Indonesia
+Gaya: edukatif + bikin penasaran
+
+WAJIB output JSON VALID tanpa tambahan teks:
+{
+  "title": "",
+  "description": "",
+  "hashtags": []
+}
+`;
+
+    try{
+            // Prefer the stable v1 :generate endpoint. If it returns 404, try v1beta2 as a fallback.
+            const model = 'gemini-1.5-flash';
+            const endpointsToTry = [
+                `https://generativelanguage.googleapis.com/v1/models/${model}:generate?key=${GEMINI_API_KEY}`,
+                `https://generativelanguage.googleapis.com/v1beta2/models/${model}:generate?key=${GEMINI_API_KEY}`,
+                `https://generativelanguage.googleapis.com/v1beta/models/${model}:generate?key=${GEMINI_API_KEY}`
+            ];
+
+            let res = null;
+            const fetchOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    prompt: { text: prompt },
+                    // tuning controls (optional)
+                    temperature: 0.6,
+                    maxOutputTokens: 512
+                })
+            };
+
+            // Try endpoints in order until one responds without 404
+            for (const url of endpointsToTry) {
+                try {
+                    res = await fetch(url, fetchOptions);
+                } catch (e) {
+                    console.warn('Fetch to', url, 'failed:', e);
+                    res = null;
+                }
+                if (res && res.status !== 404) break;
+            }
+
+            if (!res) throw new Error('Network error calling Gemini endpoints');
+            if (!res.ok) {
+                const txt = await res.text().catch(() => '');
+                throw new Error('HTTP Error ' + res.status + ' - ' + txt);
+            }
+
+            const data = await res.json();
+
+            // Extract text from several possible response shapes used by GL APIs
+            let rawText = '';
+            try {
+                const cand = data?.candidates?.[0] || data?.candidate || data?.output?.[0] || null;
+                if (cand) {
+                    // common shapes
+                    if (cand.content && Array.isArray(cand.content)) {
+                        // content may contain objects with `text` or `parts`
+                        for (const c of cand.content) {
+                            if (typeof c === 'string') rawText += c + '\n';
+                            else if (c?.text) rawText += c.text + '\n';
+                            else if (c?.parts && Array.isArray(c.parts)) rawText += (c.parts.map(p => p.text || '').join('\n')) + '\n';
+                        }
+                        rawText = rawText.trim();
+                    } else if (cand.output && Array.isArray(cand.output)) {
+                        rawText = cand.output.map(o => (o.content || []).map(cc => cc.text || '').join('')).join('\n');
+                    } else if (typeof cand === 'string') {
+                        rawText = cand;
+                    } else if (data?.output?.[0]?.content) {
+                        rawText = data.output[0].content.map(c=>c.text||'').join('\n');
+                    }
+                }
+            } catch (e) {
+                console.warn('Parsing candidate shape failed', e, data);
+            }
+
+            if (!rawText) {
+                // last resort: stringify entire response for debugging
+                console.warn('Unrecognized Gemini response shape:', data);
+                throw new Error('Response kosong atau format tidak dikenali dari Gemini');
+            }
+
+      // 🔥 Amankan parsing JSON (kalau Gemini nambah teks)
+      const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+      if(!jsonMatch){
+        console.error("Raw Gemini output:", rawText);
+        throw new Error("Format JSON tidak valid");
+      }
+
+      const parsed = JSON.parse(jsonMatch[0]);
+
+      document.getElementById('aiTitle').textContent = parsed.title || "-";
+      document.getElementById('aiDescription').textContent = parsed.description || "-";
+      document.getElementById('aiHashtags').textContent =
+        Array.isArray(parsed.hashtags)
+          ? parsed.hashtags.map(h => `#${h}`).join(' ')
+          : "-";
+
+      document.getElementById('aiResult').style.display = 'block';
+
+    }catch(err){
+      console.error("Gemini error:", err);
+      alert("Gagal generate AI content. Cek console.");
+    }
+  }
 </script>
 
 </body>
