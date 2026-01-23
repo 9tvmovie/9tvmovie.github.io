@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <title>Trending Movies & TV Shows</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/assets/icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="/assets/trend.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -72,6 +71,12 @@
             <div id="modalMeta-cast"></div>
             </div>
             <p id="modalOverview"></p>
+
+            <!-- TMDB Keywords -->
+            <div id="modalKeywords" style="margin-top:8px;">
+                <strong>Keywords:</strong>
+                <span id="modalKeywordsList">—</span>
+            </div>
 
             <!-- GEMINI AI -->
              <div style="margin-top:16px;">
@@ -480,7 +485,7 @@ function resetFilters(){
 
 // Modal Functions
 async function openModal(id) {
-    const detailUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${API_KEY}&append_to_response=videos,credits,images`;
+    const detailUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${API_KEY}&append_to_response=videos,credits,images,keywords`;
     try {
         const res = await fetch(detailUrl);
         const data = await res.json();
@@ -668,6 +673,19 @@ if (castList.length) {
 
         // Overview
         document.getElementById('modalOverview').textContent = data.overview || 'No overview available.';
+
+        // Keywords (TMDB)
+        try {
+            const kwEl = document.getElementById('modalKeywordsList');
+            let keywordsArr = [];
+            if (data.keywords) {
+                if (Array.isArray(data.keywords)) keywordsArr = data.keywords;
+                else if (Array.isArray(data.keywords.keywords)) keywordsArr = data.keywords.keywords;
+                else if (Array.isArray(data.keywords.results)) keywordsArr = data.keywords.results;
+            }
+            const kwNames = keywordsArr.map(k => k.name).filter(Boolean);
+            if (kwEl) kwEl.textContent = kwNames.length ? kwNames.join(', ') : '—';
+        } catch (e) { console.warn('Failed to render keywords', e); }
 
         // Trailer
         const trailerDiv = document.getElementById('modalTrailer');
@@ -932,7 +950,7 @@ try{
 
 <script>
   // ⛔️ JANGAN TARUH API KEY DI PRODUCTION
-  const GEMINI_API_KEY = "AIzaSyBq4plwo8UeTNNZtR2b34RcTIp-AiohlGs";
+  const GEMINI_API_KEY = "API KEY HERE";
 
   async function generateAIContent(){
     const modal = document.getElementById('modalDetails');
@@ -986,7 +1004,10 @@ WAJIB output JSON VALID tanpa tambahan teks:
     try{
             // Prefer the stable v1 :generate endpoint. If it returns 404, try v1beta2 as a fallback.
             const model = 'gemini-1.5-flash';
+            // Try local proxy host first (use full http://localhost:3000 to avoid hitting static server at :5500)
             const endpointsToTry = [
+                'http://localhost:3000/api/generate',
+                '/api/generate',
                 `https://generativelanguage.googleapis.com/v1/models/${model}:generate?key=${GEMINI_API_KEY}`,
                 `https://generativelanguage.googleapis.com/v1beta2/models/${model}:generate?key=${GEMINI_API_KEY}`,
                 `https://generativelanguage.googleapis.com/v1beta/models/${model}:generate?key=${GEMINI_API_KEY}`
@@ -997,8 +1018,8 @@ WAJIB output JSON VALID tanpa tambahan teks:
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    // proxy expects { prompt }
                     prompt: { text: prompt },
-                    // tuning controls (optional)
                     temperature: 0.6,
                     maxOutputTokens: 512
                 })
