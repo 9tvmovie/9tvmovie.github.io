@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Trending Movies & TV Shows</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel='stylesheet' href='/assets/trend.css'>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -486,9 +486,11 @@ async function openModal(id) {
         const backdropsList = (data.images && data.images.backdrops) ? data.images.backdrops : [];
         const backdropGallery = backdropsList.map(b => ({
             original: b.file_path ? `https://image.tmdb.org/t/p/w1280${b.file_path}` : '',
+            // prefer w1280 for backdrop downloads (user requested 1280px)
+            download: b.file_path ? `https://image.tmdb.org/t/p/w1280${b.file_path}` : '',
             medium: b.file_path ? `https://image.tmdb.org/t/p/w500${b.file_path}` : '',
             thumb: b.file_path ? `https://image.tmdb.org/t/p/w300${b.file_path}` : ''
-        })).filter(x => x.original || x.medium || x.thumb);
+        })).filter(x => x.original || x.medium || x.thumb || x.download);
         if (posterImageEl) {
             if (backdropGallery.length) {
                 posterImageEl.style.cursor = 'zoom-in';
@@ -521,9 +523,10 @@ async function openModal(id) {
         // map to full urls (use original for main view, w500 for small)
         const postersGallery = postersList.map(p => ({
             original: p.file_path ? `https://image.tmdb.org/t/p/w1280${p.file_path}` : '',
+            download: p.file_path ? `https://image.tmdb.org/t/p/w780${p.file_path}` : '',
             medium: p.file_path ? `https://image.tmdb.org/t/p/w500${p.file_path}` : '',
             thumb: p.file_path ? `https://image.tmdb.org/t/p/w300${p.file_path}` : ''
-        })).filter(x => x.original || x.medium || x.thumb);
+        })).filter(x => x.original || x.medium || x.thumb || x.download);
         // initialize current gallery to posters by default
         window._currentGallery = postersGallery;
         window._currentGalleryIndex = 0;
@@ -716,17 +719,38 @@ function openGallery(startIndex = 0) {
         img.loading = 'lazy';
         img.decoding = 'async';
         img.style.cursor = realUrl ? 'zoom-in' : 'default';
-        // clicking a card: use original for backdrops, medium for posters
+
+        // clicking image still opens high-res in new tab (zoom). Keep behavior.
         img.onclick = () => {
-            const openUrl = (galleryType === 'backdrops')
-                ? (g.original || g.medium || g.thumb || '')
-                : (g.medium || g.original || g.thumb || '');
+            const openUrl = g.original || g.medium || g.thumb || '';
             if (openUrl) window.open(openUrl, '_blank');
         };
+
+        // determine download URL (prefer explicit 'download' w780, fallback to original/medium)
+        const downloadUrl = g.download || g.original || g.medium || g.thumb || '';
+
+        // download button: direct download via fetch (to avoid opening new tab)
+        const dlBtn = document.createElement('button');
+        dlBtn.className = 'gallery-download-btn';
+        dlBtn.type = 'button';
+        // show correct hint: backdrops download at w1280, posters at w780
+        dlBtn.title = (galleryType === 'backdrops') ? 'Download high-res (w1280)' : 'Download high-res (w780)';
+        dlBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="32" d="M12 21c-4.97 0 -9 -4.03 -9 -9c0 -4.97 4.03 -9 9 -9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="32;0"/></path><path stroke-dasharray="2 4" stroke-dashoffset="6" d="M12 3c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9" opacity="0"><set fill="freeze" attributeName="opacity" begin="0.45s" to="1"/><animateTransform fill="freeze" attributeName="transform" begin="0.45s" dur="0.6s" type="rotate" values="-180 12 12;0 12 12"/><animate attributeName="stroke-dashoffset" begin="0.85s" dur="0.6s" repeatCount="indefinite" to="0"/></path><path stroke-dasharray="10" stroke-dashoffset="10" d="M12 8v7.5"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.85s" dur="0.2s" to="0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 15.5l3.5 -3.5M12 15.5l-3.5 -3.5"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.05s" dur="0.2s" to="0"/></path></g></svg>`;
+        dlBtn.style.cursor = downloadUrl ? 'pointer' : 'default';
+        dlBtn.onclick = (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            if (!downloadUrl) return;
+            const baseTitle = (document.getElementById('modalTitle') && document.getElementById('modalTitle').textContent) ? document.getElementById('modalTitle').textContent : '';
+            const suffix = (galleryType === 'backdrops') ? 'backdrop' : 'poster';
+            downloadHighRes(downloadUrl, baseTitle, suffix);
+        };
+
         const meta = document.createElement('div');
         meta.className = 'card-meta';
         meta.textContent = `${galleryType === 'backdrops' ? 'Backdrop' : 'Poster'} ${i+1}`;
         card.appendChild(img);
+        card.appendChild(dlBtn);
         card.appendChild(meta);
         if (grid) grid.appendChild(card);
     });
@@ -762,6 +786,41 @@ function closeGallery() {
     try { const g2 = document.getElementById('galleryGridBackdrop'); if (g2) g2.innerHTML = ''; } catch(e){}
     // disconnect lazy loader observer
     try { if (window._galleryObserver) { window._galleryObserver.disconnect(); window._galleryObserver = null; } } catch(e) {}
+}
+
+// Fetch a remote image and trigger a download (works around cross-origin download limitations)
+async function downloadHighRes(url, baseTitle, suffix) {
+    // maintain counts in-session to avoid duplicate filenames
+    window._downloadNameCounts = window._downloadNameCounts || {};
+    const base = (typeof baseTitle === 'string' && baseTitle.trim()) ? slugify(baseTitle.trim()) : '';
+    const safeSuggested = base ? `${base}_${suffix || 'image'}` : (suffix || 'image');
+
+    // Force extension to jpg for consistency
+    const ext = 'jpg';
+
+    // compute unique filename within this session
+    const key = `${safeSuggested}.${ext}`;
+    const count = window._downloadNameCounts[key] ? window._downloadNameCounts[key] + 1 : 1;
+    window._downloadNameCounts[key] = count;
+    const filename = count === 1 ? `${safeSuggested}.${ext}` : `${safeSuggested}_${count}.${ext}`;
+
+    try {
+        const res = await fetch(url, { mode: 'cors' });
+        if (!res.ok) throw new Error('Network response was not ok');
+        const blob = await res.blob();
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+    } catch (err) {
+        console.error('Download failed', err);
+        // fallback: open in new tab so user can save manually
+        try { window.open(url, '_blank'); } catch(e){}
+    }
 }
 
 function updateGalleryImage() {
@@ -835,6 +894,20 @@ window.addEventListener('popstate', ()=>{
 window.addEventListener('DOMContentLoaded', ()=>{
     parseQueryForMedia();
 });
+
+// Title link: update URL to /trend/ without reloading
+function goToTrend(event){
+    try{
+        if(event) event.preventDefault();
+        history.pushState(null,'', '/trend/');
+    }catch(e){ console.warn('goToTrend failed', e); }
+}
+
+// attach handler if element exists
+try{
+    const t = document.getElementById('titleLink');
+    if(t) t.addEventListener('click', goToTrend);
+}catch(e){}
 </script>
 
 </body>
