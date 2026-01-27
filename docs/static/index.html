@@ -451,6 +451,13 @@ select, button { padding:6px 12px; border-radius:5px; border:none; background:#2
 <script>
 const API_KEY = "aa39650b8e660d5046678ac425688903";
 // API base (Cloudflare Worker) - update to your worker URL
+// const API_BASE = "https://trend.salsabiladepi31.workers.dev";
+// NOTE: set `API_BASE` to your Cloudflare Worker URL or local wrangler dev URL.
+// Examples:
+//  - deployed worker: "https://your-worker-domain.workers.dev"
+//  - local wrangler dev (default port): "http://127.0.0.1:8787"
+// If you don't have a worker, set to empty string and implement server-side endpoints
+// Use the deployed worker URL to avoid local wrangler steps
 const API_BASE = "https://trend.salsabiladepi31.workers.dev";
 let currentPage=1, maxPage=1, mediaType='movie', mediaCategory='popular';
 let selectedGenre='', selectedYear='', selectedSort='popularity.desc';
@@ -1377,6 +1384,3 @@ async function generateFromModal(platform){
 
 </body>
 </html>
-
-
-
