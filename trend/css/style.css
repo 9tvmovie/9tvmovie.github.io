@@ -164,6 +164,12 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
         min-height: 220px;
         margin: 0 auto;
         right: 0px;
+        top: 0px;
+    }
+    .api-key-row {
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
     }
     /* Stack layout: poster above details */
     #modalPoster { width: 140px; margin: 12px auto 12px auto; position: relative; display: block; }
