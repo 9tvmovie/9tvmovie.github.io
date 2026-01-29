@@ -216,7 +216,8 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
     justify-content: space-between;
     align-items: unset;
    }
-  #toggle-tmdb-key {position: absolute; margin-left: 40px; padding: 5px;}
+  #toggle-tmdb-key {position: absolute; margin-left: 45px; padding: 5px;}
+  .control-pane {justify-content: center;}
 }
 
 /* Desktop grid layout */
