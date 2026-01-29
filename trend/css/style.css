@@ -6,37 +6,9 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
 .movie-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:15px;}
 .movie { background:#222; padding:3px; border-radius:8px; text-align:left; transition:0.3s; position: relative; overflow: hidden; }
 .movie img { width:100%; border-radius:6px; height:230px; object-fit:cover; cursor: pointer; display:block; }
-        .movie .title { margin-top:5px; font-weight:bold; 
-            display: -webkit-box; 
-            -webkit-line-clamp: 1; 
-            -webkit-box-orient: vertical; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            max-height: 3.2em; /* fallback to limit height (approx 2 lines) */
-            line-height: 1.6em;
-        }
-.movie .rating {
-    font-size: 13px;
-    position: absolute;
-    top: 13px;
-    right: 13px;
-    padding: 4px 6px;
-    color: gold;
-    border-radius: 6px;
-    background: rgba(0,0,0,0.6);
-    z-index: 5;
-}
-.movie .media-type-icon {
-    position: absolute;
-    top: 13px;
-    left: 13px;
-    font-size: 12px;
-    padding: 4px 6px;
-    color: #ffffff;
-    border-radius: 6px;
-    background: #0070ffba;
-    z-index: 5;
-}
+.movie .title { margin-top:5px; font-weight:bold;display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;max-height: 3.2em;line-height: 1.6em;}
+.movie .rating {font-size: 13px;position: absolute;top: 6px;right: 6px;padding: 4px 6px;color: gold;border-radius: 6px;background: rgba(0,0,0,0.6);z-index: 5;}
+.movie .media-type-icon { position: absolute; top: 6px;  left: 6px; font-size: 12px; padding: 4px 6px; color: #ffffff; border-radius: 6px; background: #0070ffba; z-index: 5;}
 .movie .status { font-size:13px; opacity:0.8; margin-top:3px; }
 .movie .country { font-size:14px; opacity:0.7; }
 .movie .year { font-size:12px; opacity:0.8; margin-top:3px; }
@@ -53,35 +25,15 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
 #modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); z-index: 1000; overflow-y: auto; }
 
 /* Responsive modal layout: on wide screens show poster on the left and details on the right; on small screens stack vertically */
-#modalContent {
-    position: relative;
-    max-width: 1100px;
-    margin: 4% auto;
-    background: #000408;
-    border-radius: 10px;
-    padding: 20px;
-    color: #fff;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-}
-
+#modalContent {position: relative;max-width: 1100px;margin: 4% auto;background: #000408;border-radius: 10px;padding: 20px;color: #fff;box-shadow: 0 6px 30px rgba(0,0,0,0.6);}
 #closeModal { position: absolute; right: 10px; font-size: 30px; cursor: pointer; color: #fff; z-index: 2; background: transparent; border: none; }
-
 #modalBackdrop { width: 100%; min-height: 220px; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; position: absolute; margin: -20px -20px 12px -20px;filter: brightness(0.6); opacity: 0.5; }
 #modalBackdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35)); border-radius: 8px 8px 0 0; }
-
 /* Poster (desktop uses a left column; mobile becomes inline) */
-#modalPoster {
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    z-index: 2;
-}
-
+#modalPoster {display: block; border-radius: 8px;box-shadow: 0 6px 18px rgba(0,0,0,0.45); z-index: 2;}
 #modalDetails { z-index: 2; }
-
 /* Subtle small backdrop image under the poster */
 #modalBackdropImage { display: none; }
-
 #modalTitle { font-size: 26px; margin-bottom: 10px; }
 #modalMeta { width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; font-size: 14px; color: #d9cd71; }
 .meta-item { /*background: rgba(255,255,255,0.02);*/ padding: 6px 10px; border-bottom: 1px solid rgba(128,128,128,0.22); line-height: 1.2; }
@@ -90,7 +42,6 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
 #modalOverview { margin-bottom: 16px; font-size: 15px; line-height: 1.5; }
 #modalTrailer { margin-top: 18px; }
 #modalTrailer iframe { width: 100%; height: 360px; border: none; border-radius: 8px; }
-
 /* Gallery overlay as grid of poster cards */
 #galleryOverlay { display:none; position:fixed; inset:0; background: rgb(16 16 16); z-index: 2000; display:none; align-items:center; justify-content:center; }
 #galleryInner { max-width: 1100px; width: calc(100% - 80px); margin: 40px auto; position: relative; padding: 20px 0; max-height: calc(100vh - 120px); overflow:auto; }
@@ -306,43 +257,14 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
       background: #1b1b1b;
       color: #fff;
     }
-
-    .control-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .control-actions button {
-      background: #222;
-      border-radius: 6px;
-      padding: 7px 14px;
-      font-size: 14px;
-      cursor: pointer;
-      border: none;
-    }
-
-    .control-actions button.primary {
-      background: #1f6feb;
-    }
-
-    .control-actions button.success {
-      background: #1a7f37;
-    }
-
-    .status {
-      width: 100%;
-      margin-top: 10px;
-      padding: 8px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      display: none;
-    }
-
+    .control-actions {display: flex; gap: 10px; flex-wrap: wrap;}
+    .control-actions button { background: #222;border-radius: 6px;padding: 7px 14px;font-size: 14px;cursor: pointer; border: none; }
+    .control-actions button.primary {background: #1f6feb; }
+    .control-actions button.success { background: #1a7f37;}
+    .status {width: 100%; margin-top: 10px;padding: 8px 10px; border-radius: 6px;font-size: 13px;display: none;}
     .status.success { background: #063b2a; color: #3ddc97; display: block; }
     .status.error   { background: #3b0d0d; color: #ff6b6b; display: block; }
     .status.info    { background: #082f49; color: #7dd3fc; display: block; }
-
     .api-key-row { display: flex; gap: 8px; align-items: center; }
     .generate-social-content { display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px; }
     #aiToggleBtn:hover { background: #0084f9 !important; }
