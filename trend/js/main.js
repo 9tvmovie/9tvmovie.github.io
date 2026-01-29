@@ -1402,7 +1402,7 @@ function openGallery(arg, startIndex = 0){
       const dlBtn = document.createElement('button')
       dlBtn.className = 'gallery-download-btn'
       dlBtn.type = 'button'
-      dlBtn.title = galleryType === 'backdrops' ? 'Download high-res (w1280)' : 'Download high-res (w780)'
+      dlBtn.title = galleryType === 'backdrops' ? 'Download high-res (w1280)' : 'Download high-res (w1280)'
       dlBtn.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -1515,7 +1515,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       try{ const url = `${window.TMDB.base}/${mediaType}/${id}/images?api_key=${window.TMDB.apiKey}`; const res = await fetch(url); if(res.ok){ const json = await res.json(); postersArr = json.posters || postersArr; backdropsArr = json.backdrops || backdropsArr } }
       catch(err){ console.warn('attachClick: images fallback fetch error', err) }
     }
-    const posters = (postersArr||[]).map(p=>({ original: p.file_path?window.TMDB.imageUrl(p.file_path,'w1280'): '', download: p.file_path?window.TMDB.imageUrl(p.file_path,'w780'): '', medium: p.file_path?window.TMDB.imageUrl(p.file_path,'w500'): '', thumb: p.file_path?window.TMDB.imageUrl(p.file_path,'w300'): '' })).filter(x=>x.original||x.medium||x.thumb||x.download)
+    const posters = (postersArr||[]).map(p=>({ original: p.file_path?window.TMDB.imageUrl(p.file_path,'w1280'): '', download: p.file_path?window.TMDB.imageUrl(p.file_path,'w1280'): '', medium: p.file_path?window.TMDB.imageUrl(p.file_path,'w500'): '', thumb: p.file_path?window.TMDB.imageUrl(p.file_path,'w300'): '' })).filter(x=>x.original||x.medium||x.thumb||x.download)
     const backdrops = (backdropsArr||[]).map(b=>({ original: b.file_path?window.TMDB.imageUrl(b.file_path,'w1280'):'', download: b.file_path?window.TMDB.imageUrl(b.file_path,'w1280'):'', medium: b.file_path?window.TMDB.imageUrl(b.file_path,'w500'):'', thumb: b.file_path?window.TMDB.imageUrl(b.file_path,'w300'):'' })).filter(x=>x.original||x.medium||x.thumb||x.download)
     // choose based on preferType: if preferType indicates backdrop, prefer backdrops first
     const preferBackdrops = String(preferType || '').toLowerCase().includes('backdrop')
