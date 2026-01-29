@@ -154,7 +154,7 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
     #galleryGrid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap:10px; }
     .gallery-card img { height:auto; }
 }
-
+#ai-api-key {color: #31b1bf;  background: #222222;}
 /* Responsiveness */
 @media (max-width: 768px) {
     /* Force two columns on mobile */
@@ -216,6 +216,7 @@ select, button { height: fit-content;padding:6px 12px; border-radius:5px; border
     justify-content: space-between;
     align-items: unset;
    }
+  #toggle-tmdb-key {position: absolute; margin-left: 40px; padding: 5px;}
 }
 
 /* Desktop grid layout */
